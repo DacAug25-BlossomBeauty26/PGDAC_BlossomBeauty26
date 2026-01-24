@@ -1,0 +1,32 @@
+package com.example.demo.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.example.demo.dto.LoginResponseDTO;
+import com.example.demo.dto.UserRegisterDTO;
+import com.example.demo.dto.userResponseDTO;
+import com.example.demo.services.UserService;
+
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    // Register API
+    @PostMapping("/register")
+    public ResponseEntity<userResponseDTO> registerUser(@RequestBody UserRegisterDTO dto) {
+
+        userResponseDTO response = userService.registerUser(dto);
+        return ResponseEntity.ok(response);
+    }
+ // Login API
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDTO> loginUser(@RequestBody LoginDTO dto) {
+        LoginResponseDTO response = userService.login(dto);
+        return ResponseEntity.ok(response);
+    }
+}
