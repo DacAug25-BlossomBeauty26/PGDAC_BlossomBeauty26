@@ -1,0 +1,67 @@
+package com.example.demo.services;
+
+import java.sql.Date;
+import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dto.UserRegisterDTO;
+import com.example.demo.dto.userResponseDTO;
+import com.example.demo.entities.Area;
+import com.example.demo.entities.Role;
+import com.example.demo.entities.User;
+import com.example.demo.repositories.AreaRepo;
+import com.example.demo.repositories.RoleRepo;
+import com.example.demo.repositories.UserRepo;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserRepo userRepository;
+
+    @Autowired
+    private RoleRepo roleRepository;
+
+    @Autowired
+    private AreaRepo areaRepository;
+
+    @Override
+    public userResponseDTO registerUser(UserRegisterDTO dto) {
+
+        // 1) check if role exists
+        Role role = roleRepository.findById(dto.getRoleId())
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+
+        // 2) check if area exists
+        Area area = areaRepository.findById(dto.getAreaId())
+                .orElseThrow(() -> new RuntimeException("Area not found"));
+
+        // 3) create user entity
+        User user = new User();
+        user.setUsername(dto.getUsername());
+        user.setContact(dto.getContact());
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
+        user.setRole(role);
+        user.setArea(area);
+        user.setCreatedAt(Date.valueOf(LocalDate.now()));
+        user.setStatus(User.Status.ACTIVE);
+
+        // 4) save user
+        User savedUser = userRepository.save(user);
+
+        // 5) response
+        UserResponseDTO response = new UserResponseDTO();
+        response.setId(savedUser.getId());
+        response.setUsername(savedUser.getUserName());
+        response.setEmail(savedUser.getEmail());
+        response.setContact(savedUser.getContactNo());
+        response.setRoleName(savedUser.getRoleId().getRoleName());
+        response.setAreaName(savedUser.getAreaId().getAreaName());
+        response.setStatus(savedUser.getStatus().name());
+
+        return response;
+    }
+}

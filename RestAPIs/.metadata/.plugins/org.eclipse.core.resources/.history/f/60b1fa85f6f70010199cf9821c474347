@@ -1,0 +1,102 @@
+package com.example.demo.entities;
+
+import java.sql.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="user")
+public class User {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "userId")
+	int userId;
+	@Column(nullable = false)
+	String username;
+	@Column(nullable = false)
+	String contact;
+	@Column(nullable = false)
+	String email;
+	@Column(nullable = false)
+	String password;
+	@ManyToOne
+    @JoinColumn(name = "RoleId", nullable = false)
+	Role roleId;
+	@ManyToOne
+    @JoinColumn(name = "AreaId", nullable = false)
+	Area areaId;
+	Date createdAt;
+	public enum Status {
+        ACTIVE,
+        BLOCKED
+    }
+	@Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    Status status;
+	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public String getUserName() {
+		return username;
+	}
+	public void setUserName(String userName) {
+		this.username = userName;
+	}
+	public String getContactNo() {
+		return contact;
+	}
+	public void setContactNo(String contactNo) {
+		this.contact = contactNo;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public Role getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Role roleId) {
+		this.roleId = roleId;
+	}
+	public Area getAreaId() {
+		return areaId;
+	}
+	public void setAreaId(Area areaId) {
+		this.areaId = areaId;
+	}
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	public Status getStatus() {
+		return status;
+	}
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
+	
+}
