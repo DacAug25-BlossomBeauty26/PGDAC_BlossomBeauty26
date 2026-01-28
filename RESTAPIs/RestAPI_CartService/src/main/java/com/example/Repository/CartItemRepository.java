@@ -1,21 +1,21 @@
 package com.example.Repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.Entities.CartItem;
 
-import java.util.List;
-import java.util.Optional;
-
-
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
+	
+	// Find all items in a cart
+	List<CartItem> findByCart_CartId(Long cartId);
 
-    // Get all items for a cart
-    List<CartItem> findByCartCartId(Long cartId);
 
-    // Check if product already exists in cart
-    Optional<CartItem> findByCartCartIdAndProductId(Long cartId, Long productId);
-    
-    
+	// Find a specific item in a cart by productId
+	CartItem findByCart_CartIdAndProductId(Long cartId, Long productId);
+
+
+	// Delete all items for a cart
+	void deleteByCart_CartId(Long cartId);
 }
-

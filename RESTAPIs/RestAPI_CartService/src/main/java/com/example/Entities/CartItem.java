@@ -1,13 +1,11 @@
 package com.example.Entities;
-
-
 import jakarta.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
+
 @Table(name = "cart_item")
 public class CartItem {
 
@@ -15,50 +13,73 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartItemId;
 
-    @ManyToOne
-    @JoinColumn(name = "cart_id", nullable = false)
-    @JsonIgnore
-    private Cart cart; // FK to cart
-
-    private Long productId; // Product ID from ProductService
-
-    private String productName;
-
-    private BigDecimal price;
-
-    private Integer quantity = 1;
-
-    private BigDecimal subtotal;
+    private Long productId; 
+    private int quantity;
+    private double price; 
 
     private LocalDateTime createdAt = LocalDateTime.now();
-
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    // Getters and Setters
-    public Long getCartItemId() { return cartItemId; }
-    public void setCartItemId(Long cartItemId) { this.cartItemId = cartItemId; }
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    @JsonBackReference
+    private Cart cart;
 
-    public Cart getCart() { return cart; }
-    public void setCart(Cart cart) { this.cart = cart; }
+	public Long getCartItemId() {
+		return cartItemId;
+	}
 
-    public Long getProductId() { return productId; }
-    public void setProductId(Long productId) { this.productId = productId; }
+	public Long getProductId() {
+		return productId;
+	}
 
-    public String getProductName() { return productName; }
-    public void setProductName(String productName) { this.productName = productName; }
+	public int getQuantity() {
+		return quantity;
+	}
 
-    public BigDecimal getPrice() { return price; }
-    public void setPrice(BigDecimal price) { this.price = price; }
+	public double getPrice() {
+		return price;
+	}
 
-    public Integer getQuantity() { return quantity; }
-    public void setQuantity(Integer quantity) { this.quantity = quantity; }
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
 
-    public BigDecimal getSubtotal() { return subtotal; }
-    public void setSubtotal(BigDecimal subtotal) { this.subtotal = subtotal; }
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+	public Cart getCart() {
+		return cart;
+	}
 
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+	public void setCartItemId(Long cartItemId) {
+		this.cartItemId = cartItemId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+    
 }

@@ -1,84 +1,95 @@
 package com.example.Controller;
+
+import org.springframework.web.bind.annotation.*;
+
 import com.example.Entities.Cart;
+import com.example.Entities.CartDiscount;
 import com.example.Entities.CartItem;
 import com.example.Service.CartService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cart")
-//@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/cart")
 public class CartController {
 
-    @Autowired
-    private CartService cartService;
+    private final CartService cartService;
 
-    // ---------------- ADD TO CART ----------------
-    @PostMapping("/add")
-    public Cart addToCart(
-            @RequestParam Long userId,
-            @RequestParam Long productId,
-            @RequestParam String productName,
-            @RequestParam BigDecimal price
-    ) {
-        return cartService.addToCart(userId, productId, productName, price);
+    public CartController(CartService cartService) {
+        this.cartService = cartService;
     }
 
-    // ---------------- VIEW CART ----------------
-    @GetMapping("/getcartbyid/{userId}")
-    public List<CartItem> getCart(@PathVariable Long userId) {
-        return cartService.getCartItems(userId);
+    // -------------------
+    // Cart APIs
+    // -------------------
+
+    @PostMapping("/{userId}")
+    public Cart createCart(@PathVariable Long userId) {
+        return cartService.createCart(userId);
     }
 
-    // ---------------- UPDATE QUANTITY ----------------
-    @PutMapping("/updatequantity")
-    public Cart updateQuantity(
-            @RequestParam Long userId,
-            @RequestParam Long productId,
-            @RequestParam int quantity
-    ) {
-        return cartService.updateQuantity(userId, productId, quantity);
+    @GetMapping("/active/{userId}")
+    public Cart getActiveCart(@PathVariable Long userId) {
+        return cartService.getActiveCartByUser(userId);
     }
 
-    // ---------------- REMOVE ITEM ----------------
-    @DeleteMapping("/removecart")
-    public void removeItem(
-            @RequestParam Long userId,
-            @RequestParam Long productId
-    ) {
-        cartService.removeItem(userId, productId);
-    }
-    
- // ---------------- APPLY DISCOUNT ----------------
-//    @PutMapping("/discount")
-//    public Cart applyDiscount(
-//            @RequestParam Long userId,
-//            @RequestParam String discountType,
-//            @RequestParam BigDecimal discountValue
-//    ) {
-//        return cartService.applyDiscount(userId, discountType, discountValue);
-//    }
-    
-    
-    @PostMapping("/applycoupon")
-    public Cart applyCoupon(
-            @RequestParam Long userId,
-            @RequestParam String code
-    ) {
-        return cartService.applyCoupon(userId, code);
-    }
-    
-    @PostMapping("/clearcart/{userId}")
-    public ResponseEntity<String> clearCart(@PathVariable Long userId) {
-        cartService.clearCartByUserId(userId);
-        return ResponseEntity.ok("Cart cleared successfully");
+    @PostMapping("/{cartId}/checkout")
+    public Cart checkoutCart(@PathVariable Long cartId) {
+        return cartService.checkoutCart(cartId);
     }
 
+    // -------------------
+    // CartItem APIs
+    // -------------------
 
+    @PostMapping("/{cartId}/item")
+    public Cart addItem(@PathVariable Long cartId,
+                        @RequestParam Long productId,
+                        @RequestParam int quantity,
+                        @RequestParam double price) {
+        return cartService.addItemToCart(cartId, productId, quantity, price);
+    }
+
+    @PatchMapping("/{cartId}/item/{itemId}")
+    public Cart updateItem(@PathVariable Long cartId,
+                           @PathVariable Long itemId,
+                           @RequestParam int quantity) {
+        return cartService.updateItemQuantity(cartId, itemId, quantity);
+    }
+
+    @DeleteMapping("/{cartId}/item/{itemId}")
+    public Cart removeItem(@PathVariable Long cartId,
+                           @PathVariable Long itemId) {
+        return cartService.removeItemFromCart(cartId, itemId);
+    }
+
+    @GetMapping("/{cartId}/items")
+    public List<CartItem> getItems(@PathVariable Long cartId) {
+        return cartService.getCartItems(cartId);
+    }
+
+    // -------------------
+    // CartDiscount APIs
+    // -------------------
+
+    @PostMapping("/{cartId}/discount")
+    public Cart applyDiscount(@PathVariable Long cartId,
+                              @RequestParam String code,
+                              @RequestParam double amount) {
+        return cartService.applyDiscount(cartId, code, amount);
+    }
+
+    @GetMapping("/{cartId}/discounts")
+    public List<CartDiscount> getDiscounts(@PathVariable Long cartId) {
+        return cartService.getCartDiscounts(cartId);
+    }
+
+    // -------------------
+    // Total API
+    // -------------------
+
+    @GetMapping("/{cartId}/total")
+    public double getTotal(@PathVariable Long cartId) {
+        return cartService.calculateTotal(cartId);
+    }
 }
-
