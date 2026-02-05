@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36804.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WishlistService", "WishlistService.csproj", "{BDD79F4B-5768-4426-A651-D34992382EA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDD79F4B-5768-4426-A651-D34992382EA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDD79F4B-5768-4426-A651-D34992382EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDD79F4B-5768-4426-A651-D34992382EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDD79F4B-5768-4426-A651-D34992382EA1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {760A3351-65DF-42C9-AF4B-FB00BD93FA35}
+	EndGlobalSection
+EndGlobal
