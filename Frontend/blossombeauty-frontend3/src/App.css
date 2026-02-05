@@ -1,0 +1,319 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Light Teal Button */
+.btn-teal-light {
+  background-color: #74e9ca; /* light teal */
+  color: #0b5f4b; /* dark teal text for contrast */
+  border: 1px solid #0b5f4b;
+}
+
+.btn-teal-light:hover {
+  background-color: #95d6c9; /* slightly darker on hover */
+  color: #fff;
+}
+
+.text-teal {
+color: #0b5f4b; /* dark teal */
+}
+
+
+.text-teal-light {
+color: #3fbdb7; /* lighter teal for headings or less emphasis */
+}
+
+
+.btn-teal {
+  background-color: #45e8e0 !important;
+  border-color: #6fcfca !important;
+  color: #003b3a !important;
+}
+
+.btn-teal:hover {
+  background-color: #5bbdb8 !important;
+  border-color: #5bbdb8 !important;
+}
+
+.btn-primary {
+  background-color: #6fcfca !important;   /* faint teal */
+  border-color: #6fcfca !important;
+  color: #003b3a !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #5bbdb8 !important;
+  border-color: #5bbdb8 !important;
+  color: #002f2e !important;
+}
+
+/* ----------- PAGE BACKGROUND ----------- */
+.page-bg {
+  background-color: #f5fbfa;
+  min-height: 100vh;
+  padding: 40px 0;
+}
+
+/* ----------- CARD CONTAINER ----------- */
+.card-container {
+  max-width: 800px;
+  margin: auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ----------- HEADINGS ----------- */
+.teal-heading {
+  color: #1aa3a3;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.sub-text {
+  text-align: center;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+/* ----------- ITEM ROW ----------- */
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  background-color: #f0f9f9;
+  border-radius: 8px;
+  border: 1px solid #d6eeee;
+}
+
+/* ----------- SUMMARY BOX ----------- */
+.summary-box {
+  margin-top: 25px;
+  padding: 18px;
+  border-radius: 10px;
+  background-color: #e9f7f6;
+  border: 1px solid #ccebea;
+}
+
+.summary-box h5 {
+  color: #117a7a;
+  margin-bottom: 10px;
+}
+
+/* ----------- TEAL BUTTON ----------- */
+.teal-btn {
+  margin-top: 25px;
+  width: 100%;
+  padding: 12px;
+  background-color: #7fd1c8;
+  border: none;
+  border-radius: 8px;
+  color: #004d4d;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.teal-btn:hover {
+  background-color: #6ac7bd;
+}
+
+
+/* Background */
+.page-bg {
+  background-color: #f5fbfa;
+  min-height: 100vh;
+  padding: 40px 0;
+}
+
+/* Card container */
+.card-container {
+  max-width: 750px;
+  margin: auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08); /* default shadow */
+}
+
+/* Headings */
+.teal-heading {
+  color: #1aa3a3;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.invoice-card {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* stronger shadow */
+}
+/* Item row */
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  background-color: #f0f9f9;
+  border-radius: 8px;
+  border: 1px solid #d6eeee;
+  font-weight: 500;
+}
+
+/* Summary box */
+.summary-box {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 10px;
+  background-color: #e9f7f6;
+  border: 1px solid #ccebea;
+  color: #117a7a;
+  font-weight: 500;
+}
+
+/* Teal button */
+.teal-btn {
+  margin-top: 25px;
+  width: 100%;
+  padding: 12px;
+  background-color: #7fd1c8;
+  border: none;
+  border-radius: 8px;
+  color: #004d4d;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.teal-btn:hover {
+  background-color: #6ac7bd;
+}
+
+/* Page background */
+.page-bg {
+  background-color: #f5fbfa;
+  min-height: 100vh;
+  padding: 40px 0;
+}
+
+/* Main card container */
+.card-container {
+  max-width: 900px;
+  margin: auto;
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+.teal-heading {
+  text-align: center;
+  color: #1aa3a3;
+  margin-bottom: 20px;
+}
+
+/* Individual cart item row */
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f9f9;
+  border: 1px solid #d6eeee;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+}
+
+/* Quantity buttons */
+.qty-btn {
+  background-color: #e6f7f7;
+  border: 1px solid #bfe7e7;
+  color: #006666;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.qty-btn:hover {
+  background-color: #cceeee;
+}
+
+/* Summary box */
+.summary-box {
+  background-color: #e9f7f6;
+  border: 1px solid #ccebea;
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 20px;
+}
+
+/* Teal button */
+.teal-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background-color: #7fd1c8;
+  border: none;
+  border-radius: 10px;
+  color: #004d4d;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.teal-btn:hover {
+  background-color: #6ac7bd;
+}
+
+/* Remove button */
+.remove-btn {
+  background-color: transparent;
+  border: none;
+  color: #cc0000;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  text-decoration: underline;
+}
