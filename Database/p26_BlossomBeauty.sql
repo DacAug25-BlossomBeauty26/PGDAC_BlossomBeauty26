@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS `area`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `area` (
-  `areaId` int NOT NULL AUTO_INCREMENT,
-  `areaName` varchar(45) NOT NULL,
-  `cityId` int NOT NULL,
-  PRIMARY KEY (`areaId`),
-  KEY `cityIdFk_idx` (`cityId`),
-  CONSTRAINT `cityIdFk` FOREIGN KEY (`cityId`) REFERENCES `city` (`cityId`) ON DELETE CASCADE ON UPDATE CASCADE
+  `area_id` int NOT NULL AUTO_INCREMENT,
+  `area_name` varchar(45) NOT NULL,
+  `city_id` int NOT NULL,
+  PRIMARY KEY (`area_id`),
+  KEY `cityIdFk_idx` (`city_id`),
+  CONSTRAINT `cityIdFk` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -43,60 +43,29 @@ INSERT INTO `area` VALUES (1,'GOKHALENAGAR',1),(2,'DADAR',2);
 UNLOCK TABLES;
 
 --
--- Table structure for table `brand`
+-- Table structure for table `brands`
 --
 
-DROP TABLE IF EXISTS `brand`;
+DROP TABLE IF EXISTS `brands`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `brand` (
-  `brandId` int NOT NULL AUTO_INCREMENT,
-  `brandName` varchar(45) NOT NULL,
-  `brandDiscId` int NOT NULL,
-  PRIMARY KEY (`brandId`),
-  UNIQUE KEY `brandName_UNIQUE` (`brandName`),
-  KEY `brandDiscIdFk_idx` (`brandDiscId`),
-  CONSTRAINT `brandDiscIdFk` FOREIGN KEY (`brandDiscId`) REFERENCES `branddiscount` (`brandDiscId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `brands` (
+  `brand_id` bigint NOT NULL AUTO_INCREMENT,
+  `brand_name` varchar(50) NOT NULL,
+  `discount` int DEFAULT '0',
+  PRIMARY KEY (`brand_id`),
+  UNIQUE KEY `brand_name` (`brand_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `brand`
+-- Dumping data for table `brands`
 --
 
-LOCK TABLES `brand` WRITE;
-/*!40000 ALTER TABLE `brand` DISABLE KEYS */;
-INSERT INTO `brand` VALUES (1,'Lakme',1),(2,'Dove',2),(3,'dot&key',1);
-/*!40000 ALTER TABLE `brand` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `branddiscount`
---
-
-DROP TABLE IF EXISTS `branddiscount`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `branddiscount` (
-  `brandDiscId` int NOT NULL AUTO_INCREMENT,
-  `discountType` enum('PERCENTAGE','FIXED') NOT NULL,
-  `discountValue` decimal(10,2) NOT NULL,
-  `startDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `endDate` timestamp NOT NULL,
-  `status` enum('ACTIVE','INACTIVE','EXPIRED') NOT NULL DEFAULT 'ACTIVE',
-  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`brandDiscId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `branddiscount`
---
-
-LOCK TABLES `branddiscount` WRITE;
-/*!40000 ALTER TABLE `branddiscount` DISABLE KEYS */;
-INSERT INTO `branddiscount` VALUES (1,'FIXED',500.00,'2026-01-22 07:33:30','2026-01-23 09:00:00','ACTIVE','2026-01-22 07:33:30'),(2,'PERCENTAGE',10.00,'2026-01-22 07:34:02','2026-01-23 09:00:00','ACTIVE','2026-01-22 07:34:02');
-/*!40000 ALTER TABLE `branddiscount` ENABLE KEYS */;
+LOCK TABLES `brands` WRITE;
+/*!40000 ALTER TABLE `brands` DISABLE KEYS */;
+INSERT INTO `brands` VALUES (1,'Pilgrim',10),(2,'LorealParis',5),(3,'Lakme',25),(4,'Dove',30);
+/*!40000 ALTER TABLE `brands` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -107,13 +76,17 @@ DROP TABLE IF EXISTS `cart`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cart` (
-  `cartId` int NOT NULL AUTO_INCREMENT,
-  `userId` int NOT NULL,
-  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`cartId`),
-  KEY `userIDFK_idx` (`userId`),
-  CONSTRAINT `userIDFK` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `cart_id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
+  `total_amount` decimal(10,2) DEFAULT '0.00',
+  `discount_type` varchar(20) DEFAULT NULL,
+  `discount_value` decimal(10,2) DEFAULT '0.00',
+  `final_amount` decimal(10,2) DEFAULT '0.00',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `coupon_code` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`cart_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,65 +95,66 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (1,1,'2026-01-22 09:21:38');
+INSERT INTO `cart` VALUES (21,3,2725.00,NULL,0.00,2725.00,'2026-02-01 18:41:43','2026-02-01 18:41:43',NULL),(26,6,9000.00,NULL,0.00,9000.00,'2026-02-02 13:57:02','2026-02-02 13:57:02',NULL),(29,7,4500.00,NULL,0.00,4500.00,'2026-02-03 05:44:38','2026-02-03 05:44:38',NULL),(30,7,0.00,NULL,0.00,0.00,'2026-02-03 05:44:38','2026-02-03 05:44:38',NULL),(36,10,4500.00,NULL,0.00,4500.00,'2026-02-03 21:26:00','2026-02-03 21:26:00',NULL),(37,10,0.00,NULL,0.00,0.00,'2026-02-03 21:26:00','2026-02-03 21:26:00',NULL),(40,1,9000.00,NULL,0.00,9000.00,'2026-02-04 04:35:40','2026-02-04 04:35:40',NULL),(41,14,5300.00,NULL,0.00,5300.00,'2026-02-04 05:10:00','2026-02-04 05:10:00',NULL),(42,15,0.00,NULL,0.00,0.00,'2026-02-04 05:11:35','2026-02-04 05:11:35',NULL),(43,15,800.00,NULL,0.00,800.00,'2026-02-04 05:11:35','2026-02-04 05:11:35',NULL),(45,16,4500.00,NULL,0.00,4500.00,'2026-02-04 05:25:48','2026-02-04 05:25:48',NULL),(47,17,0.00,NULL,0.00,0.00,'2026-02-04 07:17:24','2026-02-04 07:17:24',NULL),(48,2,0.00,NULL,0.00,0.00,'2026-02-04 08:59:47','2026-02-04 08:59:47',NULL);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `cartitems`
+-- Table structure for table `cart_item`
 --
 
-DROP TABLE IF EXISTS `cartitems`;
+DROP TABLE IF EXISTS `cart_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cartitems` (
-  `cartItemId` int NOT NULL AUTO_INCREMENT,
-  `cartId` int NOT NULL,
-  `productId` int NOT NULL,
-  `quantity` int NOT NULL,
-  `STATUS` enum('ACTIVE','ORDERED','REMOVED') DEFAULT 'ACTIVE',
-  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`cartItemId`),
-  KEY `cartIDFK_idx` (`cartId`),
-  KEY `productID_FK_idx` (`productId`),
-  CONSTRAINT `cartIDFK` FOREIGN KEY (`cartId`) REFERENCES `cart` (`cartId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `product_ID_FK` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `cart_item` (
+  `cart_item_id` bigint NOT NULL AUTO_INCREMENT,
+  `cart_id` bigint NOT NULL,
+  `product_id` bigint NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `quantity` int NOT NULL DEFAULT '1',
+  `subtotal` decimal(10,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`cart_item_id`),
+  KEY `fk_cart` (`cart_id`),
+  CONSTRAINT `fk_cart` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cartitems`
+-- Dumping data for table `cart_item`
 --
 
-LOCK TABLES `cartitems` WRITE;
-/*!40000 ALTER TABLE `cartitems` DISABLE KEYS */;
-INSERT INTO `cartitems` VALUES (1,1,1,2,'ACTIVE','2026-01-22 09:22:09'),(2,1,2,2,'ACTIVE','2026-01-22 09:22:09');
-/*!40000 ALTER TABLE `cartitems` ENABLE KEYS */;
+LOCK TABLES `cart_item` WRITE;
+/*!40000 ALTER TABLE `cart_item` DISABLE KEYS */;
+INSERT INTO `cart_item` VALUES (45,21,7,'Lakme Eye Kajal',545.00,5,2725.00,'2026-02-01 18:55:33','2026-02-01 18:55:33'),(56,26,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-02 13:57:34','2026-02-02 13:57:34'),(57,26,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-02 13:57:34','2026-02-02 13:57:34'),(63,29,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-03 05:44:39','2026-02-03 05:44:39'),(69,36,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-03 21:26:01','2026-02-03 21:26:01'),(72,40,2,'Lakme Lipstick',4500.00,2,9000.00,'2026-02-04 04:36:25','2026-02-04 04:36:25'),(73,41,3,'Dove Bodywash',800.00,1,800.00,'2026-02-04 05:10:06','2026-02-04 05:10:06'),(74,43,3,'Dove Bodywash',800.00,1,800.00,'2026-02-04 05:11:35','2026-02-04 05:11:35'),(75,41,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-04 05:20:40','2026-02-04 05:20:40'),(78,45,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-04 06:20:20','2026-02-04 06:20:20');
+/*!40000 ALTER TABLE `cart_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `category`
+-- Table structure for table `categories`
 --
 
-DROP TABLE IF EXISTS `category`;
+DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `category` (
-  `categoryId` int NOT NULL AUTO_INCREMENT,
-  `categoryName` varchar(45) NOT NULL,
-  PRIMARY KEY (`categoryId`),
-  UNIQUE KEY `categoryName_UNIQUE` (`categoryName`)
+CREATE TABLE `categories` (
+  `category_id` bigint NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`category_id`),
+  UNIQUE KEY `category_name` (`category_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `category`
+-- Dumping data for table `categories`
 --
 
-LOCK TABLES `category` WRITE;
-/*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (2,'Bodycare'),(4,'Haircare'),(3,'Makeup'),(1,'Skincare');
-/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (3,'Bodycare'),(2,'Haircare'),(4,'Makeup'),(1,'Skincare');
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -191,10 +165,10 @@ DROP TABLE IF EXISTS `city`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `city` (
-  `cityId` int NOT NULL AUTO_INCREMENT,
-  `cityName` varchar(45) NOT NULL,
-  PRIMARY KEY (`cityId`),
-  UNIQUE KEY `cityName_UNIQUE` (`cityName`)
+  `city_id` int NOT NULL AUTO_INCREMENT,
+  `city_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`city_id`),
+  UNIQUE KEY `cityName_UNIQUE` (`city_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -209,66 +183,66 @@ INSERT INTO `city` VALUES (2,'MUMBAI'),(1,'PUNE');
 UNLOCK TABLES;
 
 --
--- Table structure for table `discountonorder`
+-- Table structure for table `coupon`
 --
 
-DROP TABLE IF EXISTS `discountonorder`;
+DROP TABLE IF EXISTS `coupon`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `discountonorder` (
-  `discountOnOrderId` int NOT NULL AUTO_INCREMENT,
-  `orderId` int NOT NULL,
-  `discountType` enum('FIXED','PERCENTAGE') NOT NULL,
-  `discountValue` decimal(10,2) DEFAULT NULL,
-  `discountAmount` decimal(10,2) DEFAULT NULL,
-  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `startDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `endDate` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`discountOnOrderId`),
-  KEY `FK_ORDER_ID_idx` (`orderId`),
-  CONSTRAINT `FK_ORDER_ID` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `coupon` (
+  `coupon_id` bigint NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) NOT NULL,
+  `discount_type` varchar(20) NOT NULL,
+  `discount_value` decimal(10,2) NOT NULL,
+  `min_cart_value` decimal(10,2) DEFAULT '0.00',
+  `expiry_date` date DEFAULT NULL,
+  `active` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`coupon_id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `discountonorder`
+-- Dumping data for table `coupon`
 --
 
-LOCK TABLES `discountonorder` WRITE;
-/*!40000 ALTER TABLE `discountonorder` DISABLE KEYS */;
-INSERT INTO `discountonorder` VALUES (1,1,'FIXED',500.00,500.00,'2026-01-22 09:39:56','2026-01-22 09:39:56','2026-01-24 09:39:56');
-/*!40000 ALTER TABLE `discountonorder` ENABLE KEYS */;
+LOCK TABLES `coupon` WRITE;
+/*!40000 ALTER TABLE `coupon` DISABLE KEYS */;
+INSERT INTO `coupon` VALUES (1,'WELCOME10','PERCENTAGE',10.00,1000.00,'2026-05-05',1),(2,'FLAT50','FIXED',50.00,500.00,'2026-02-05',1),(3,'NEWYEAR20','PERCENTAGE',20.00,5000.00,'2027-01-01',1),(4,'SUMMER100','FIXED',100.00,6000.00,'2026-03-14',1);
+/*!40000 ALTER TABLE `coupon` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ordereditems`
+-- Table structure for table `order_items`
 --
 
-DROP TABLE IF EXISTS `ordereditems`;
+DROP TABLE IF EXISTS `order_items`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ordereditems` (
-  `ordereditemId` int NOT NULL AUTO_INCREMENT,
-  `orderId` int NOT NULL,
-  `productId` int NOT NULL,
-  `quantity` int DEFAULT '1',
-  `pricePerUnit` decimal(10,2) NOT NULL,
-  `totalPrice` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`ordereditemId`),
-  KEY `FKorderId_idx` (`orderId`),
-  KEY `FKproductId_idx` (`productId`),
-  CONSTRAINT `FKorderId` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FKproductId` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `order_items` (
+  `order_item_id` bigint NOT NULL AUTO_INCREMENT,
+  `order_id` bigint NOT NULL,
+  `product_id` bigint NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `quantity` int NOT NULL DEFAULT '1',
+  `subtotal` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`order_item_id`),
+  KEY `fk_order_items_order` (`order_id`),
+  KEY `fk_order_items_product` (`product_id`),
+  CONSTRAINT `fk_order_items_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_order_items_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ordereditems`
+-- Dumping data for table `order_items`
 --
 
-LOCK TABLES `ordereditems` WRITE;
-/*!40000 ALTER TABLE `ordereditems` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ordereditems` ENABLE KEYS */;
+LOCK TABLES `order_items` WRITE;
+/*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
+INSERT INTO `order_items` VALUES (2,25,2,'Lakme Lipstick',4500.00,1,4500.00),(3,25,4,'Pilgrim Facewash',540.00,1,540.00),(6,27,2,'Lakme Lipstick',4500.00,1,4500.00),(7,28,2,'Lakme Lipstick',4500.00,1,4500.00),(10,30,1,'TotalRepair Shampoo',500.00,1,500.00),(15,30,2,'Lakme Lipstick',4500.00,1,4500.00),(33,46,1,'TotalRepair Shampoo',500.00,3,1500.00),(34,46,2,'Lakme Lipstick',4500.00,1,4500.00),(35,47,1,'TotalRepair Shampoo',500.00,2,1000.00),(36,48,2,'Lakme Lipstick',4500.00,1,4500.00),(37,49,2,'Lakme Lipstick',4500.00,1,4500.00),(38,50,2,'Lakme Lipstick',4500.00,1,4500.00),(39,51,3,'Dove Bodywash',800.00,1,800.00),(40,51,1,'TotalRepair Shampoo',500.00,1,500.00),(41,51,4,'Pilgrim Facewash',540.00,1,540.00);
+/*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -279,17 +253,18 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
-  `orderId` int NOT NULL AUTO_INCREMENT,
-  `userId` int NOT NULL,
-  `subTotal` decimal(10,2) DEFAULT '0.00',
-  `finalAmount` decimal(10,0) DEFAULT NULL,
-  `paymentMethod` enum('COD','CARD','UPI') DEFAULT 'COD',
-  `status` enum('PLACED','CONFIRMED','DISPATCHED','SHIPPED','DELIVERED','RETURNED') DEFAULT 'CONFIRMED',
-  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`orderId`),
-  KEY `userIDFK__idx` (`userId`),
-  CONSTRAINT `userIDFK_` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `order_id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `final_amount` decimal(10,2) NOT NULL,
+  `order_status` enum('CREATED','CONFIRMED','DISPATCHED','DELIVERED','CANCELLED') NOT NULL DEFAULT 'CREATED',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `payment_method` varchar(20) NOT NULL DEFAULT 'COD',
+  PRIMARY KEY (`order_id`),
+  KEY `fk_orders_user` (`user_id`),
+  CONSTRAINT `fk_orders_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,98 +273,45 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,1,1598.00,1098,'COD','CONFIRMED','2026-01-22 09:30:57');
+INSERT INTO `orders` VALUES (25,2,5040.00,5040.00,'DISPATCHED','2026-02-01 18:29:23','2026-02-04 05:28:57','COD'),(27,2,4500.00,4050.00,'CANCELLED','2026-02-01 18:30:54','2026-02-04 08:02:35','COD'),(28,3,4500.00,4050.00,'DELIVERED','2026-02-01 18:41:40','2026-02-02 13:47:15','COD'),(30,2,5000.00,4950.00,'CREATED','2026-02-02 11:49:58','2026-02-02 11:49:58','COD'),(46,1,6000.00,5900.00,'CREATED','2026-02-03 23:22:32','2026-02-03 23:22:32','COD'),(47,1,1000.00,900.00,'CANCELLED','2026-02-04 04:35:33','2026-02-04 04:35:58','COD'),(48,16,4500.00,4050.00,'DISPATCHED','2026-02-04 05:25:46','2026-02-04 05:29:01','COD'),(49,17,4500.00,4050.00,'CANCELLED','2026-02-04 07:17:01','2026-02-04 07:18:12','COD'),(50,17,4500.00,4050.00,'CREATED','2026-02-04 07:17:14','2026-02-04 07:17:14','COD'),(51,2,1840.00,1656.00,'CREATED','2026-02-04 08:59:04','2026-02-04 08:59:04','COD');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `product`
+-- Table structure for table `products`
 --
 
-DROP TABLE IF EXISTS `product`;
+DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `product` (
-  `productId` int NOT NULL AUTO_INCREMENT,
-  `productName` varchar(45) NOT NULL,
-  `productDescription` longtext,
-  `price` decimal(10,2) DEFAULT NULL,
-  `stockQuantity` tinyint(1) DEFAULT '1',
-  `brandId` int NOT NULL,
-  `subcategoryId` int NOT NULL,
+CREATE TABLE `products` (
+  `product_id` bigint NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(100) NOT NULL,
+  `description` text,
+  `price` decimal(10,2) NOT NULL,
+  `stock` int DEFAULT '0',
+  `brand_id` bigint NOT NULL,
+  `subcategory_id` bigint NOT NULL,
   `status` enum('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',
-  `image` varchar(500) DEFAULT NULL,
-  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `productDomain` enum('SKIN','HAIR','BOTH') DEFAULT NULL,
-  PRIMARY KEY (`productId`),
-  KEY `brandIdFk_idx` (`brandId`),
-  KEY `subCategoryIdFk_idx` (`subcategoryId`),
-  CONSTRAINT `brandIdFk` FOREIGN KEY (`brandId`) REFERENCES `brand` (`brandId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `subCategoryIdFk` FOREIGN KEY (`subcategoryId`) REFERENCES `subcategory` (`subcategoryId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `image_url` varchar(255) NOT NULL,
+  PRIMARY KEY (`product_id`),
+  KEY `brand_id` (`brand_id`),
+  KEY `subcategory_id` (`subcategory_id`),
+  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`brand_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `products_ibfk_2` FOREIGN KEY (`subcategory_id`) REFERENCES `subcategories` (`subcategory_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `product`
+-- Dumping data for table `products`
 --
 
-LOCK TABLES `product` WRITE;
-/*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'Matte Lipstick','Product Overview\nIndulge in rich, long-lasting color with this Velvet Matte Lipstick, crafted to deliver intense pigmentation and a smooth, lightweight feel. The creamy formula glides effortlessly onto the lips, providing a flawless matte finish without causing dryness or discomfort. Each swipe delivers bold color while keeping lips soft and comfortable throughout the day.\n\nNourishing Formula\nFormulated with nourishing ingredients such as Vitamin E, Shea Butter, and Jojoba Oil, this lipstick helps retain moisture and prevents lips from feeling dry or cracked. The blend of conditioning agents ensures your lips stay hydrated while maintaining a refined, velvety appearance.\n\nLong-Lasting Wear\nThe smudge-resistant and transfer-proof formula is designed to last for hours, making it ideal for long days, special occasions, or everyday wear. The color remains vibrant and fresh without frequent touch-ups, allowing you to enjoy confident, all-day elegance.\n\nShade Range & Finish\nAvailable in a wide range of carefully curated shades, this lipstick complements every skin tone and suits multiple makeup styles, from natural daytime looks to bold evening glam. Its versatile texture allows you to build coverage from subtle to dramatic with ease.\n\nSafety & Shelf Life\nDermatologically tested and cruelty-free, this lipstick is suitable for all skin types. It has a shelf life of 36 months from the manufacturing date and is best used within 24 months after opening, ensuring long-lasting quality and performance.',799.00,1,1,5,'ACTIVE','C:/images/lipstick1.jpg','2026-01-22 08:02:26','SKIN'),(2,'BrightBeauty Suncreen','Product Overview\nProtect and nourish your skin with Dot & Key Sunscreen, thoughtfully formulated to provide broad-spectrum protection against harmful UVA and UVB rays. Its lightweight, non-greasy texture blends seamlessly into the skin, leaving no white cast and ensuring a comfortable, breathable finish suitable for daily use.\n\nAdvanced Sun Protection Formula\nPowered with effective UV filters and skin-loving actives, this sunscreen helps shield the skin from sun damage, tanning, and premature aging. The formula works to strengthen the skin barrier while protecting it from environmental stressors caused by prolonged sun exposure.\n\nHydration & Skin Care Benefits\nInfused with hydrating and soothing ingredients, Dot & Key Sunscreen helps maintain the skin’s moisture balance throughout the day. It keeps the skin feeling soft, fresh, and calm, making it ideal even for sensitive or sun-exposed skin.\n\nTexture & Finish\nDesigned for everyday wear, the sunscreen has a lightweight, fast-absorbing texture that layers well under makeup. It provides a natural, non-sticky finish without clogging pores, making it suitable for all skin types, including oily and acne-prone skin.\n\nSafety & Shelf Life\nDermatologically tested and cruelty-free, Dot & Key Sunscreen is safe for regular use. It has a shelf life of 36 months from the manufacturing date and is recommended to be used within 24 months after opening to ensure optimal efficacy and protection.',845.00,1,3,1,'ACTIVE','C:/images/sunscreen.jpg','2026-01-22 08:59:15','SKIN');
-/*!40000 ALTER TABLE `product` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `productimages`
---
-
-DROP TABLE IF EXISTS `productimages`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `productimages` (
-  `imageId` int NOT NULL AUTO_INCREMENT,
-  `productId` int NOT NULL,
-  `imageUrl` varchar(500) NOT NULL,
-  PRIMARY KEY (`imageId`),
-  KEY `productId_FK_idx` (`productId`),
-  CONSTRAINT `productId_FK` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `productimages`
---
-
-LOCK TABLES `productimages` WRITE;
-/*!40000 ALTER TABLE `productimages` DISABLE KEYS */;
-INSERT INTO `productimages` VALUES (1,1,'C:/images/lipstick1.jpg'),(2,2,'C:/images/sunscreen.jpg');
-/*!40000 ALTER TABLE `productimages` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `productrecommendationtag`
---
-
-DROP TABLE IF EXISTS `productrecommendationtag`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `productrecommendationtag` (
-  `productId` int NOT NULL,
-  `tagType` enum('SKIN_TYPE','SKIN_CONCERN','HAIR_TYPE','HAIR_CONCERN') NOT NULL,
-  `tagValue` enum('OILY','DRY','COMBINATION','SENSITIVE','ACNE','PIGMENTATION','PIMPLE','DULLNESS','STRAIGHT','WAVY','CURLY','HAIRFALL','DANDRUFF','FRIZZ') NOT NULL,
-  KEY `fk_prt_product` (`productId`),
-  CONSTRAINT `fk_prt_product` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `productrecommendationtag`
---
-
-LOCK TABLES `productrecommendationtag` WRITE;
-/*!40000 ALTER TABLE `productrecommendationtag` DISABLE KEYS */;
-INSERT INTO `productrecommendationtag` VALUES (1,'SKIN_TYPE','OILY'),(1,'SKIN_CONCERN','ACNE');
-/*!40000 ALTER TABLE `productrecommendationtag` ENABLE KEYS */;
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,'TotalRepair Shampoo','anti dandruff shampoo for hair fall control',500.00,4,2,1,'ACTIVE','2026-01-30 07:38:27','2026-02-04 04:09:19','http://localhost:8082/uploads/images/shampoo.jpg'),(2,'Lakme Lipstick','Matte Revolution Refillable Lipstick (Look Of Love Collection)',4500.00,100,3,2,'ACTIVE','2026-01-30 07:41:37','2026-02-04 04:33:03','http://localhost:8082/uploads/images/lipstick.jpg'),(3,'Dove Bodywash','Dove Deeply Nourishing Body Wash|| With Moisturisers For Softer|| Smoother Skin|| For All Skin Type|| 825 ml',800.00,101,4,3,'ACTIVE','2026-01-30 07:46:40','2026-02-04 04:33:03','http://localhost:8082/uploads/images/bodywash.jpg'),(4,'Pilgrim Facewash','Pilgrim Korean Rice Water Hydra Glow Facewash| Hydrated Glowy Skin| Korean Glow| Gentle & Non-Drying| Niacinamide| Hyaluronic Acid (100ml) acne removal',540.00,60,1,4,'ACTIVE','2026-01-30 07:48:20','2026-02-04 04:33:03','http://localhost:8082/uploads/images/facewash.jpg'),(7,'Lakme Eye Kajal','Lakme 9 to 5 Eyeconic Kajal, Smudgeproof, Waterproof, lasts upto 24 Hrs, Black, 0.35gm',545.00,80,3,2,'ACTIVE','2026-02-01 18:39:13','2026-02-04 04:33:03','http://localhost:8082/uploads/images/kajal.jpg'),(8,'Dove Body Scrub','Dove Exfoliating Body Polish Scrub for Delicate & Sensitive Skin with Oatmeal & Calendula Oil, Gently Exfoliates and Moisturizes to Reveal Instantly Soft, Smooth & Healthy Skin, Naturally Derived Ingredients, Sulfate-Free, Floral Fragrance, 298g',780.00,12,4,3,'ACTIVE','2026-02-01 18:48:34','2026-02-04 04:33:03','http://localhost:8082/uploads/images/scrub.jpg');
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -400,9 +322,9 @@ DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
-  `roleId` int NOT NULL AUTO_INCREMENT,
-  `roleName` varchar(45) NOT NULL,
-  PRIMARY KEY (`roleId`)
+  `role_id` int NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(30) NOT NULL,
+  PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -412,107 +334,105 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'ADMIN'),(2,'USER');
+INSERT INTO `role` VALUES (1,'ADMIN'),(2,'CUSTOMER');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `subcategory`
+-- Table structure for table `subcategories`
 --
 
-DROP TABLE IF EXISTS `subcategory`;
+DROP TABLE IF EXISTS `subcategories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `subcategory` (
-  `subcategoryId` int NOT NULL AUTO_INCREMENT,
-  `subcategoryName` varchar(45) NOT NULL,
-  `categoryId` int DEFAULT NULL,
-  PRIMARY KEY (`subcategoryId`),
-  KEY `categoryIdFk_idx` (`categoryId`),
-  CONSTRAINT `categoryIdFk` FOREIGN KEY (`categoryId`) REFERENCES `category` (`categoryId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `subcategories` (
+  `subcategory_id` bigint NOT NULL AUTO_INCREMENT,
+  `subcategory_name` varchar(50) NOT NULL,
+  `category_id` bigint NOT NULL,
+  PRIMARY KEY (`subcategory_id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `subcategories_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `subcategory`
+-- Dumping data for table `subcategories`
 --
 
-LOCK TABLES `subcategory` WRITE;
-/*!40000 ALTER TABLE `subcategory` DISABLE KEYS */;
-INSERT INTO `subcategory` VALUES (1,'Sunscreen',1),(2,'Toner',1),(3,'Bodywash',2),(4,'Bodyscrub',2),(5,'Lipstick',3),(6,'Mascara',3),(7,'Shampoo',4),(8,'HairOil',4);
-/*!40000 ALTER TABLE `subcategory` ENABLE KEYS */;
+LOCK TABLES `subcategories` WRITE;
+/*!40000 ALTER TABLE `subcategories` DISABLE KEYS */;
+INSERT INTO `subcategories` VALUES (1,'Shampoo',2),(2,'Lipstick',4),(3,'Bodywash',3),(4,'Facewash',1),(5,'Facecream',1);
+/*!40000 ALTER TABLE `subcategories` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `user`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `userId` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `email` varchar(75) NOT NULL,
   `contact` varchar(20) NOT NULL,
   `status` enum('ACTIVE','BLOCKED') DEFAULT 'ACTIVE',
-  `roleId` int NOT NULL,
-  `areaId` int NOT NULL,
-  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `skinType` enum('DRY','OILY','SENSITIVE','COMBINATION') NOT NULL,
-  `hairType` enum('STRAIGHT','WAVY','CURLY','COILY') NOT NULL,
-  `skinConcern` enum('ACNE','PIMPLE','WRINKLES','PIGMENTATION') NOT NULL,
-  `HairConcern` enum('FRIZZ','DRYNESS','DANDRUFF','HAIRFALL') NOT NULL,
-  PRIMARY KEY (`userId`),
-  UNIQUE KEY `password_UNIQUE` (`password`),
+  `role_id` int NOT NULL DEFAULT '2',
+  `area_id` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
-  KEY `roleIdFk_idx` (`roleId`),
-  KEY `areaIdFk_idx` (`areaId`),
-  CONSTRAINT `areaIdFk` FOREIGN KEY (`areaId`) REFERENCES `area` (`areaId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `roleIdFk` FOREIGN KEY (`roleId`) REFERENCES `role` (`roleId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `areaIdFk_idx` (`area_id`),
+  KEY `roleFk_idx` (`role_id`),
+  CONSTRAINT `areaIdFk` FOREIGN KEY (`area_id`) REFERENCES `area` (`area_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `roleFk` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Akanksha','akanksha@123','akanksha@gmail.com','7028180179','ACTIVE',2,1,'2026-01-22 07:46:20','DRY','WAVY','ACNE','FRIZZ'),(2,'Sakshi','sakshi@123','sakshi@gmail.com','7854123690','ACTIVE',1,1,'2026-01-22 10:42:17','DRY','WAVY','ACNE','FRIZZ'),(3,'Sana','sana@123','sana@gmail.com','9874563210','ACTIVE',2,2,'2026-01-22 10:42:17','OILY','CURLY','PIMPLE','DRYNESS');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Akanksha','Gulekar','akanksha123','akanksha123','akanksha@gmail.com','7028180179','ACTIVE',2,1,'2026-01-30 13:16:48'),(2,'Smita','Gulekar','smita123','smita123','smita@gmail.com','9860981673','ACTIVE',2,1,'2026-01-30 13:25:56'),(3,'Aditya','Gulekar','aaditya123','Aaditya@123','aaditya@gmail.com','7481249753','ACTIVE',2,2,'2026-01-31 07:23:16'),(5,'Admin','Admin','admin123','Admin@123','admin@gmail.com','00000000000','ACTIVE',1,1,'2026-02-01 13:11:36'),(8,'Subhash','Gulekar','subhash@123','Subhash@123','subhash@123','7896541230','ACTIVE',2,2,'2026-02-03 06:22:42'),(14,'Shiva','Patil','shiva123','Shiva@123','shiva@gmail.com','7896541230','ACTIVE',2,2,'2026-02-04 05:09:03'),(16,'Sakshi','Gulekar','sakshi','Sakshi@123','sakshi@gmail.com','7896412301','ACTIVE',2,2,'2026-02-04 05:23:50'),(17,'Shana','Warsi','Shana123','Shana@123','inbox.abc@gmail.com','7896541230','ACTIVE',2,2,'2026-02-04 07:15:57'),(18,'Shivay','Patil','shiva@123','Shiva@123','shivay@gmail.com','7896541230','ACTIVE',2,2,'2026-02-04 08:57:21');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `wishlist`
+-- Table structure for table `wishlist_items`
 --
 
-DROP TABLE IF EXISTS `wishlist`;
+DROP TABLE IF EXISTS `wishlist_items`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `wishlist` (
-  `wishlistId` int NOT NULL AUTO_INCREMENT,
-  `userId` int NOT NULL,
-  `productId` int NOT NULL,
-  `status` enum('ACTIVE','REMOVED') DEFAULT 'ACTIVE',
-  `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`wishlistId`),
-  KEY `FK_USERID_idx` (`userId`),
-  KEY `FK_PROD_ID_idx` (`productId`),
-  CONSTRAINT `FK_PROD_ID` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_USERID` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE `wishlist_items` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `product_id` bigint NOT NULL,
+  `product_name` varchar(150) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_user_product` (`user_id`,`product_id`),
+  KEY `fk_wishlist_product` (`product_id`),
+  CONSTRAINT `fk_wishlist_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_wishlist_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `wishlist`
+-- Dumping data for table `wishlist_items`
 --
 
-LOCK TABLES `wishlist` WRITE;
-/*!40000 ALTER TABLE `wishlist` DISABLE KEYS */;
-INSERT INTO `wishlist` VALUES (1,1,1,'ACTIVE','2026-01-22 09:43:58'),(2,1,2,'ACTIVE','2026-01-22 09:44:05');
-/*!40000 ALTER TABLE `wishlist` ENABLE KEYS */;
+LOCK TABLES `wishlist_items` WRITE;
+/*!40000 ALTER TABLE `wishlist_items` DISABLE KEYS */;
+INSERT INTO `wishlist_items` VALUES (1,1,1,'TotalRepair Shampoo',500.00,'2026-02-02 08:12:53');
+/*!40000 ALTER TABLE `wishlist_items` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -524,4 +444,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-01-22 16:51:39
+-- Dump completed on 2026-02-04 15:18:31

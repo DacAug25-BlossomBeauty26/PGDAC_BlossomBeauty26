@@ -1,0 +1,117 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\akank\\.netService\\WishlistService\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|c:\\users\\akank\\.netservice\\wishlistservice\\controllers\\wishlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:controllers\\wishlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|c:\\users\\akank\\.netservice\\wishlistservice\\services\\wishlistservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:services\\wishlistservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|c:\\users\\akank\\.netservice\\wishlistservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|c:\\users\\akank\\.netservice\\wishlistservice\\models\\wishlistitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:models\\wishlistitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|c:\\users\\akank\\.netservice\\wishlistservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|c:\\users\\akank\\.netservice\\wishlistservice\\data\\wishlistdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:data\\wishlistdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WishlistController.cs",
+              "DocumentMoniker": "C:\\Users\\akank\\.netService\\WishlistService\\Controllers\\WishlistController.cs",
+              "RelativeDocumentMoniker": "Controllers\\WishlistController.cs",
+              "ToolTip": "C:\\Users\\akank\\.netService\\WishlistService\\Controllers\\WishlistController.cs",
+              "RelativeToolTip": "Controllers\\WishlistController.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAuwD4AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T07:27:03.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "WishlistServices.cs",
+              "DocumentMoniker": "C:\\Users\\akank\\.netService\\WishlistService\\Services\\WishlistServices.cs",
+              "RelativeDocumentMoniker": "Services\\WishlistServices.cs",
+              "ToolTip": "C:\\Users\\akank\\.netService\\WishlistService\\Services\\WishlistServices.cs",
+              "RelativeToolTip": "Services\\WishlistServices.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAYwAYAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T07:25:03.759Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\akank\\.netService\\WishlistService\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\akank\\.netService\\WishlistService\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T07:16:36.171Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "WishlistDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\akank\\.netService\\WishlistService\\Data\\WishlistDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\WishlistDbContext.cs",
+              "ToolTip": "C:\\Users\\akank\\.netService\\WishlistService\\Data\\WishlistDbContext.cs",
+              "RelativeToolTip": "Data\\WishlistDbContext.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T07:15:03.176Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WishlistItem.cs",
+              "DocumentMoniker": "C:\\Users\\akank\\.netService\\WishlistService\\Models\\WishlistItem.cs",
+              "RelativeDocumentMoniker": "Models\\WishlistItem.cs",
+              "ToolTip": "C:\\Users\\akank\\.netService\\WishlistService\\Models\\WishlistItem.cs",
+              "RelativeToolTip": "Models\\WishlistItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T07:07:50.749Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\akank\\.netService\\WishlistService\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\akank\\.netService\\WishlistService\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-02T06:18:58.362Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
