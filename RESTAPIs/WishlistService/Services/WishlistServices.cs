@@ -1,6 +1,9 @@
-﻿using WishlistService.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using WishlistService.Data;
 using WishlistService.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace WishlistService.Services
 {
@@ -13,39 +16,45 @@ namespace WishlistService.Services
             _context = context;
         }
 
-        public async Task<bool> AddToWishlist(WishlistItem item)
+        // Add product to wishlist
+        public async Task<WishlistItem> AddToWishlist(long userId, long productId)
         {
-            var exists = await _context.WishlistItems
-                .AnyAsync(w => w.UserId == item.UserId && w.ProductId == item.ProductId);
+            var exists = await _context.Wishlist
+                .AnyAsync(w => w.UserId == userId && w.ProductId == productId);
 
             if (exists)
-                return false;
+                throw new System.Exception("Product already in wishlist");
 
-            _context.WishlistItems.Add(item);
+            var item = new WishlistItem
+            {
+                UserId = userId,
+                ProductId = productId
+            };
+
+            _context.Wishlist.Add(item);
             await _context.SaveChangesAsync();
-            return true;
+            return item;
         }
 
+        // Remove product from wishlist
         public async Task<bool> RemoveFromWishlist(long userId, long productId)
         {
-            var item = await _context.WishlistItems
+            var item = await _context.Wishlist
                 .FirstOrDefaultAsync(w => w.UserId == userId && w.ProductId == productId);
 
-            if (item == null)
-                return false;
+            if (item == null) return false;
 
-            _context.WishlistItems.Remove(item);
+            _context.Wishlist.Remove(item);
             await _context.SaveChangesAsync();
             return true;
         }
 
-        public async Task<List<WishlistItem>> GetWishlist(long userId)
+        // Fetch wishlist of logged-in user
+        public async Task<List<WishlistItem>> GetWishlistByUser(long userId)
         {
-            return await _context.WishlistItems
+            return await _context.Wishlist
                 .Where(w => w.UserId == userId)
-                .OrderByDescending(w => w.CreatedAt)
                 .ToListAsync();
         }
     }
 }
-

@@ -9,6 +9,7 @@ import CartPage from "./components/CartPage";
 import OrderConfirmationPage from "./components/OrderConfirmationPage";
 import InvoicePage from "./components/InvoicePage";
 import MyOrders from "./components/MyOrders";
+import Wishlist from "./components/Wishlist";
 function App() {
   return (
     <Provider store={store}>
@@ -20,6 +21,8 @@ function App() {
           <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
           <Route path="/invoice" element={<InvoicePage /> }/>
           <Route path="/my-orders" element={<MyOrders />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+            
         </Routes>
       </BrowserRouter>
     </Provider>

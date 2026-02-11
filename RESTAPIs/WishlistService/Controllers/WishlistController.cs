@@ -1,67 +1,78 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Text;
-using System.Text.Json;
-using WishlistService.Models;
 using WishlistService.Services;
+using WishlistService.Models;
 
 namespace WishlistService.Controllers
 {
-    [ApiController]
     [Route("api/wishlist")]
+    [ApiController]
     public class WishlistController : ControllerBase
     {
-        private readonly WishlistServices _wishlistServices;
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IConfiguration _configuration;
+        private readonly WishlistServices _wishlistService;
 
-        public WishlistController(
-            WishlistServices wishlistServices,
-            IHttpClientFactory httpClientFactory,
-            IConfiguration configuration)
+        public WishlistController(WishlistServices wishlistService)
         {
-            _wishlistServices = wishlistServices;
-            _httpClientFactory = httpClientFactory;
-            _configuration = configuration;
+            _wishlistService = wishlistService;
         }
 
-        // ADD TO WISHLIST
         [HttpPost("add")]
-        public async Task<IActionResult> AddToWishlist([FromBody] WishlistItem item)
+        public async Task<IActionResult> Add([FromBody] WishlistItem item)
         {
-            var added = await _wishlistServices.AddToWishlist(item);
+            // 1️⃣ Check if the JSON mapped correctly
+            if (item == null)
+            {
+                Console.WriteLine("Received null WishlistItem. Check frontend JSON.");
+                return BadRequest("WishlistItem is null or JSON is invalid");
+            }
 
-            if (!added)
-                return BadRequest("Product already in wishlist");
+            Console.WriteLine($"Received: userId={item.UserId}, productId={item.ProductId}");
 
-            return Ok("Added to wishlist");
+            try
+            {
+                // 2️⃣ Call the service
+                var added = await _wishlistService.AddToWishlist(item.UserId, item.ProductId);
+
+                // 3️⃣ Return the result
+                return Ok(added);
+            }
+            catch (Exception ex)
+            {
+                // 4️⃣ Log the full exception for debugging
+                Console.WriteLine("Exception in AddToWishlist: " + ex);
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
         }
 
-        // REMOVE FROM WISHLIST
+
+
+
+
+
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetUserWishlist(long userId)
+        {
+            try
+            {
+                Console.WriteLine($"Fetching wishlist for userId={userId}");
+                var items = await _wishlistService.GetWishlistByUser(userId);
+                return Ok(items);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching wishlist: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+
         [HttpDelete("remove")]
-        public async Task<IActionResult> RemoveFromWishlist(
-            [FromQuery] long userId,
-            [FromQuery] long productId)
+        public async Task<IActionResult> Remove(long userId, long productId)
         {
-            var removed = await _wishlistServices.RemoveFromWishlist(userId, productId);
+            var success = await _wishlistService.RemoveFromWishlist(userId, productId);
+            if (!success)
+                return NotFound("Item not found");
 
-            if (!removed)
-                return NotFound("Wishlist item not found");
-
-            return Ok("Removed from wishlist");
+            return Ok("Removed successfully");
         }
-
-        //  GET WISHLIST BY USER
-        [HttpGet("{userId:long}")]
-        public async Task<IActionResult> GetWishlist(long userId)
-        {
-            var items = await _wishlistServices.GetWishlist(userId);
-            return Ok(items);
-        }
-
-      
-
-       
-
     }
-
 }

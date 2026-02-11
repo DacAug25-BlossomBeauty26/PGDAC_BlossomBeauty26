@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, setAdmin } from "../store/userSlice"; 
@@ -26,12 +25,12 @@ const LoginForm = () => {
 
     // Admin Login
     if (formData.email === "admin@gmail.com" && formData.password === "Admin@123") {
-      dispatch(setAdmin(true)); //  admin flag in redux
+      dispatch(setAdmin(true)); // admin flag in redux
       navigate("/admin");
       return;
     }
 
-    //  Normal user 
+    // Normal user
     dispatch(loginUser(formData));
   };
 
@@ -75,7 +74,17 @@ const LoginForm = () => {
         </button>
       </form>
 
-      {error && <p className="text-danger text-center mt-3">{error}</p>}
+      {/* Error Message */}
+     {error && (
+  <p className="text-danger text-center mt-3">
+    {error?.status === 401
+      ? "Invalid email or password"
+      : "Login failed. Please try again."}
+  </p>
+)}
+
+
+      {/* Success Message */}
       {userInfo && (
         <p className="text-success text-center mt-3">Logged in Successfully!</p>
       )}

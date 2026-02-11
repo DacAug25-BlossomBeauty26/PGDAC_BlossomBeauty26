@@ -1,14 +1,12 @@
-
 import React, { useState, useEffect } from "react";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { addToCart, fetchCart } from "../store/cartSlice";
-// import { fetchWishlist, addProductToWishlist } from "../store/wishlistSlice";
 import { logout } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
-
+import Wishlist from "./Wishlist";
 
 // Carousel images
 import img1 from "../assets/images/1.webp";
@@ -23,6 +21,7 @@ import img9 from "../assets/images/9.webp";
 import img10 from "../assets/images/10.webp";
 import img11 from "../assets/images/11.webp";
 import { prod_url } from "./restenpoints";
+import { fetchWishlist, addWishlistItem, removeWishlistItem } from "../store/wishlistSlice";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -33,8 +32,6 @@ const Home = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [showProfile, setShowProfile] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-
-  // Concern & recommendation states
   const [showConcernModal, setShowConcernModal] = useState(false);
   const [selectedConcerns, setSelectedConcerns] = useState([]);
   const [recommendedProducts, setRecommendedProducts] = useState([]);
@@ -43,16 +40,14 @@ const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //  REDUX 
+  // REDUX
   const userInfo = useSelector((state) => state.user?.userInfo ?? {});
   const cartItems = useSelector((state) => state.cart?.items ?? []);
-  const wishlistItems = useSelector((state) => state.wishlist?.items ?? []); 
-  const images = [
-    img1, img2, img3, img4, img5,
-    img6, img7, img8, img9, img10, img11
-  ];
+  const wishlistItems = useSelector((state) => state.wishlist?.items ?? []);
 
-  //CAROUSEL
+  const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11];
+
+  // CAROUSEL
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
@@ -60,29 +55,23 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
- //FETCH PRODUCTS
+  // FETCH PRODUCTS
   useEffect(() => {
     axios
-      .get(prod_url+"/getallactiveproducts")  //API GATEWAYY
+      .get(prod_url + "/getallactiveproducts") // API GATEWAY
       .then((res) => setProducts(res.data || []))
       .catch((err) => console.error("Product fetch error", err));
   }, []);
 
-  //FETCH CART AFTER LOGIN
+  // FETCH CART & WISHLIST AFTER LOGIN
   useEffect(() => {
     if (userInfo?.userId) {
       dispatch(fetchCart(userInfo.userId));
+      dispatch(fetchWishlist(userInfo.userId));
     }
   }, [userInfo, dispatch]);
 
-  //FETCH WISHLIST AFTER LOGIN
-  // useEffect(() => {
-  //   if (userInfo?.userId) {
-  //     dispatch(fetchWishlist(userInfo.userId));
-  //   }
-  // }, [userInfo, dispatch]);
-
-  //AUTO ADD AFTER LOGIN
+  // AUTO ADD AFTER LOGIN
   useEffect(() => {
     if (userInfo?.userId && pendingProduct) {
       handleAddToCart(pendingProduct);
@@ -92,7 +81,7 @@ const Home = () => {
     }
   }, [userInfo, pendingProduct]);
 
-  //ADD TO CART
+  // ADD TO CART
   const handleAddToCart = (product) => {
     if (!userInfo?.userId) {
       setPendingProduct(product);
@@ -118,31 +107,35 @@ const Home = () => {
   };
 
   // ADD TO WISHLIST
-  // const handleAddToWishlist = (product) => {
-  //   if (!userInfo?.userId) {
-  //     setPendingProduct(product);
-  //     setIsLogin(true);
-  //     setShowModal(true);
-  //     return;
-  //   }
+  const handleAddToWishlist = (product) => {
+    if (!userInfo?.userId) {
+      setPendingProduct(product);
+      setIsLogin(true);
+      setShowModal(true);
+      return;
+    }
 
-  //   dispatch(
-  //     addProductToWishlist({
-  //       userId: userInfo.userId,
-  //       productId: product.productId,
-  //       productName: product.productName,
-  //       price: product.price.toString(),
-  //     })
-  //   )
-  //     .unwrap()
-  //     .then(() => {
-  //       setSuccessMessage(`💖 ${product.productName} added to wishlist`);
-  //       setTimeout(() => setSuccessMessage(""), 2500);
-  //       dispatch(fetchWishlist(userInfo.userId));
-  //     });
-  // };
+    const exists = wishlistItems.some((item) => item.productId === product.productId);
+    if (exists) return;
 
-  // CLOSE PROFILE 
+    dispatch(addWishlistItem({ userId: userInfo.userId, productId: product.productId }))
+      .unwrap()
+      .then(() => {
+        setSuccessMessage(`💖 ${product.productName} added to wishlist`);
+        setTimeout(() => setSuccessMessage(""), 2500);
+      });
+  };
+
+  const handleRemoveFromWishlist = (product) => {
+    dispatch(removeWishlistItem({ userId: userInfo.userId, productId: product.productId }))
+      .unwrap()
+      .then(() => {
+        setSuccessMessage(`❌ ${product.productName} removed from wishlist`);
+        setTimeout(() => setSuccessMessage(""), 2500);
+      });
+  };
+
+  // CLOSE PROFILE
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!e.target.closest(".profile-dropdown")) setShowProfile(false);
@@ -151,7 +144,7 @@ const Home = () => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
-  //SEARCH FILTER 
+  // SEARCH FILTER
   const filteredProducts = products.filter((product) =>
     product.productName.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -192,10 +185,10 @@ const Home = () => {
     setShowRecommendation(true);
     setShowConcernModal(false);
   };
-//navbar
+
+  // NAVBAR + RENDER
   return (
     <>
-      
       <nav className="navbar navbar-expand-lg px-5" style={{ backgroundColor: "#e6f7f7" }}>
         <span
           className="navbar-brand fw-bold fs-4"
@@ -237,15 +230,10 @@ const Home = () => {
 
               {/* WISHLIST */}
               <button
-                className="btn btn-outline-dark rounded-pill position-relative ms-2"
+                className="btn btn-outline-danger rounded-pill ms-2"
                 onClick={() => navigate("/wishlist")}
               >
-                💖 Wishlist
-                {wishlistItems.length > 0 && (
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {wishlistItems.length}
-                  </span>
-                )}
+                💖 Wishlist ({wishlistItems.length})
               </button>
 
               {/* PROFILE */}
@@ -351,7 +339,6 @@ const Home = () => {
               <div key={product.productId} className="col-md-4 mb-4">
                 <div className="card h-100 shadow-sm border-success">
                   <img
-                    // src={`${prod_url}/${product.imageUrl}`}
                     src={product.imageUrl}
                     className="card-img-top"
                     alt={product.productName}
@@ -366,12 +353,21 @@ const Home = () => {
                     >
                       Add to Cart
                     </button>
-                    <button
-                      // className="btn btn-outline-danger mt-2"
-                      // onClick={() => handleAddToWishlist(product)}
-                    >
-                      💖 Add to Wishlist
-                    </button>
+                    {wishlistItems.some((item) => item.productId === product.productId) ? (
+                      <button
+                        className="btn btn-outline-secondary mt-2"
+                        onClick={() => handleRemoveFromWishlist(product)}
+                      >
+                        ❌ Remove from Wishlist
+                      </button>
+                    ) : (
+                      <button
+                        className="btn btn-outline-danger mt-2"
+                        onClick={() => handleAddToWishlist(product)}
+                      >
+                        💖 Add to Wishlist
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -393,32 +389,38 @@ const Home = () => {
             <div key={product.productId} className="col-md-4 mb-4">
               <div className="card h-100 shadow-sm">
                 <img
-                  //src={`${prod_url}/images/${product.imageUrl}`}  //APIGATEWAY
                   src={product.imageUrl}
                   className="card-img-top"
                   alt={product.productName}
                   style={{ height: "250px", objectFit: "cover" }}
                 />
-               
                 <div className="card-body d-flex flex-column">
                   <h5>{product.productName}</h5>
                   <p>₹{product.price}</p>
-                  {/* Static rating */}
-            <p style={{ color: "#31bedb", marginBottom: "5px" ,fontSize: "25px"}}>
-              ★★★★☆
-            </p>
+                  <p style={{ color: "#31bedb", marginBottom: "5px" ,fontSize: "25px"}}>
+                    ★★★★☆
+                  </p>
                   <button
                     className="btn btn-outline-dark mt-auto"
                     onClick={() => handleAddToCart(product)}
                   >
                     Add to Cart
                   </button>
-                  <button
-                    // className="btn btn-outline-danger mt-2"
-                    // onClick={() => handleAddToWishlist(product)}
-                  >
-                    💖 Add to Wishlist
-                  </button>
+                  {wishlistItems.some((item) => item.productId === product.productId) ? (
+                    <button
+                      className="btn btn-outline-secondary mt-2"
+                      onClick={() => handleRemoveFromWishlist(product)}
+                    >
+                      ❌ Remove from Wishlist
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-outline-danger mt-2"
+                      onClick={() => handleAddToWishlist(product)}
+                    >
+                      💖 Add to Wishlist
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -506,13 +508,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-
-
-
-
-
-
-
-

@@ -33,22 +33,6 @@
   },
   {
     "ContainingType": "WishlistService.Controllers.WishlistController",
-    "Method": "AddToCart",
-    "RelativePath": "api/wishlist/add-to-cart",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "item",
-        "Type": "WishlistService.Models.WishlistItem",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WishlistService.Controllers.WishlistController",
     "Method": "RemoveFromWishlist",
     "RelativePath": "api/wishlist/remove",
     "HttpMethod": "DELETE",

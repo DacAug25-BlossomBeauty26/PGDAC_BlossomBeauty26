@@ -1,118 +1,56 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WishlistService.Data;
 using WishlistService.Services;
+using Steeltoe.Discovery.Client;
+using System.Text.Json.Serialization;
 
-namespace WishlistService
+var builder = WebApplication.CreateBuilder(args);
+
+// -------------------- Configure Services --------------------
+
+// DbContext
+builder.Services.AddDbContext<WishlistDbContext>(options =>
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
+    ));
+
+// Register Wishlist service
+builder.Services.AddScoped<WishlistServices>();
+
+// Controllers + JSON options
+builder.Services.AddControllers()
+    .AddJsonOptions(opt =>
+        opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
+    );
+
+// Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Eureka Discovery client
+builder.Services.AddDiscoveryClient(builder.Configuration);
+
+
+var app = builder.Build();
+
+// -------------------- Middleware --------------------
+
+// Swagger in development
+if (app.Environment.IsDevelopment())
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
-
-            //SERVICES
-
-            builder.Services.AddControllers();
-
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
-            //  DB CONTEXT (MySQL)
-            builder.Services.AddDbContext<WishlistDbContext>(options =>
-                options.UseMySql(
-                    builder.Configuration.GetConnectionString("DefaultConnection"),
-                    ServerVersion.AutoDetect(
-                        builder.Configuration.GetConnectionString("DefaultConnection")
-                    )
-                )
-            );
-
-            builder.Services.AddScoped<WishlistServices>();
-
-
-
-            //  HttpClient (for Cart Service call)
-            builder.Services.AddHttpClient();
-
-            //  CORS (for React frontend)
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll", policy =>
-                {
-                    policy.AllowAnyOrigin()
-                          .AllowAnyMethod()
-                          .AllowAnyHeader();
-                });
-            });
-
-            var app = builder.Build();
-
-            //  MIDDLEWARE 
-
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseCors("AllowAll");
-
-            app.UseAuthorization();
-
-            app.MapControllers();
-
-            app.Run();
-        }
-    }
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
+// Enable CORS before Authorization
+app.UseCors();
 
 
 
+app.UseAuthorization();
 
+app.MapControllers();
 
-
-
-
-
-
-
-
-//namespace WishlistService
-//{
-//    public class Program
-//    {
-//        public static void Main(string[] args)
-//        {
-//            var builder = WebApplication.CreateBuilder(args);
-
-//            // Add services to the container.
-
-//            builder.Services.AddControllers();
-//            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-//            builder.Services.AddEndpointsApiExplorer();
-//            builder.Services.AddSwaggerGen();
-
-//            var app = builder.Build();
-
-//            // Configure the HTTP request pipeline.
-//            if (app.Environment.IsDevelopment())
-//            {
-//                app.UseSwagger();
-//                app.UseSwaggerUI();
-//            }
-
-//            app.UseHttpsRedirection();
-
-//            app.UseAuthorization();
-
-
-//            app.MapControllers();
-
-//            app.Run();
-//        }
-//    }
-//}
+// Eureka client registers automatically
+app.Run();

@@ -127,37 +127,6 @@
           }
         }
       }
-    },
-    "/api/wishlist/add-to-cart": {
-      "post": {
-        "tags": [
-          "Wishlist"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WishlistItem"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WishlistItem"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/WishlistItem"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
     }
   },
   "components": {
@@ -200,7 +169,7 @@
           },
           "userId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int64"
           },
           "productId": {
             "type": "integer",

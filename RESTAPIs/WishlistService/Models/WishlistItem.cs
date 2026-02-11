@@ -1,37 +1,23 @@
-﻿namespace WishlistService.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WishlistService.Models
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    [Table("wishlist")]
+    public class WishlistItem
+    {
+        [Key]
 
-   
-        [Table("wishlist_items")]
-        public class WishlistItem
-        {
-            [Key]
-            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-            [Column("id")]
-            public long Id { get; set; } // PK can remain long
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("wishlist_id")]
+        public long WishlistId { get; set; }
 
-            [Required]
-            [Column("user_id")]
-            public int UserId { get; set; } // matches User.id
+        [Required]
+        [Column("user_id")]
+        public long UserId { get; set; }
 
-            [Required]
-            [Column("product_id")]
-            public long ProductId { get; set; } // depends on Product PK type
-
-            [Required]
-            [Column("product_name")]
-            public string ProductName { get; set; }
-
-            [Required]
-            [Column("price")]
-            public decimal Price { get; set; }
-
-            [Column("created_at")]
-            public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        }
+        [Required]
+        [Column("product_id")]
+        public long ProductId { get; set; }
     }
-
-
+}

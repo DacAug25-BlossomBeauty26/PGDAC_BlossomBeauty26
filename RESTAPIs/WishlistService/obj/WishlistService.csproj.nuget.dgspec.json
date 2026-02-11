@@ -1,36 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\akank\\.netService\\WishlistService\\WishlistService.csproj": {}
+    "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\WishlistService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\akank\\.netService\\WishlistService\\WishlistService.csproj": {
+    "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\WishlistService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\akank\\.netService\\WishlistService\\WishlistService.csproj",
+        "projectUniqueName": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\WishlistService.csproj",
         "projectName": "WishlistService",
-        "projectPath": "C:\\Users\\akank\\.netService\\WishlistService\\WishlistService.csproj",
-        "packagesPath": "C:\\Users\\akank\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\akank\\.netService\\WishlistService\\obj\\",
+        "projectPath": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\WishlistService.csproj",
+        "packagesPath": "C:\\Users\\prath\\.nuget\\packages\\",
+        "outputPath": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\akank\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\prath\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -47,22 +47,22 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[6.0.25, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[6.0.25, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[6.0.25, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -70,15 +70,19 @@
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[6.0.2, )"
             },
             "RestSharp": {
               "target": "Package",
               "version": "[113.1.0, )"
             },
+            "Steeltoe.Discovery.Eureka": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.6.2, )"
+              "version": "[6.5.0, )"
             }
           },
           "imports": [
@@ -100,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.310\\RuntimeIdentifierGraph.json"
         }
       }
     }

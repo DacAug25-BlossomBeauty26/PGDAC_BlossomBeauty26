@@ -1,30 +1,38 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\akank\\.netService\\WishlistService\\",
+  "WorkspaceRootPath": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|c:\\users\\akank\\.netservice\\wishlistservice\\controllers\\wishlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:controllers\\wishlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|c:\\users\\akank\\.netservice\\wishlistservice\\services\\wishlistservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:services\\wishlistservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|c:\\users\\akank\\.netservice\\wishlistservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|c:\\users\\akank\\.netservice\\wishlistservice\\models\\wishlistitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:models\\wishlistitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|c:\\users\\akank\\.netservice\\wishlistservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|d:\\cdac content\\cdac project\\pgdac_blossombeauty26\\restapis\\wishlistservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|c:\\users\\akank\\.netservice\\wishlistservice\\data\\wishlistdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|d:\\cdac content\\cdac project\\pgdac_blossombeauty26\\restapis\\wishlistservice\\data\\wishlistdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:data\\wishlistdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|d:\\cdac content\\cdac project\\pgdac_blossombeauty26\\restapis\\wishlistservice\\models\\wishlistitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:models\\wishlistitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|d:\\cdac content\\cdac project\\pgdac_blossombeauty26\\restapis\\wishlistservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|d:\\cdac content\\cdac project\\pgdac_blossombeauty26\\restapis\\wishlistservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|d:\\cdac content\\cdac project\\pgdac_blossombeauty26\\restapis\\wishlistservice\\controllers\\wishlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:controllers\\wishlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|d:\\cdac content\\cdac project\\pgdac_blossombeauty26\\restapis\\wishlistservice\\wishlistservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:wishlistservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|d:\\cdac content\\cdac project\\pgdac_blossombeauty26\\restapis\\wishlistservice\\services\\wishlistservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDD79F4B-5768-4426-A651-D34992382EA1}|WishlistService.csproj|solutionrelative:services\\wishlistservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,80 +42,111 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAACAAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-02-11T11:25:26.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "WishlistServices.cs",
+              "DocumentMoniker": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\Services\\WishlistServices.cs",
+              "RelativeDocumentMoniker": "Services\\WishlistServices.cs",
+              "ToolTip": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\Services\\WishlistServices.cs",
+              "RelativeToolTip": "Services\\WishlistServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T09:42:06.061Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "WishlistService.csproj",
+              "DocumentMoniker": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\WishlistService.csproj",
+              "RelativeDocumentMoniker": "WishlistService.csproj",
+              "ToolTip": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\WishlistService.csproj",
+              "RelativeToolTip": "WishlistService.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-02-11T04:54:33.996Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "WishlistController.cs",
-              "DocumentMoniker": "C:\\Users\\akank\\.netService\\WishlistService\\Controllers\\WishlistController.cs",
+              "DocumentMoniker": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\Controllers\\WishlistController.cs",
               "RelativeDocumentMoniker": "Controllers\\WishlistController.cs",
-              "ToolTip": "C:\\Users\\akank\\.netService\\WishlistService\\Controllers\\WishlistController.cs",
+              "ToolTip": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\Controllers\\WishlistController.cs",
               "RelativeToolTip": "Controllers\\WishlistController.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAAAD4AAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAiwEEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-02T07:27:03.93Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "WishlistServices.cs",
-              "DocumentMoniker": "C:\\Users\\akank\\.netService\\WishlistService\\Services\\WishlistServices.cs",
-              "RelativeDocumentMoniker": "Services\\WishlistServices.cs",
-              "ToolTip": "C:\\Users\\akank\\.netService\\WishlistService\\Services\\WishlistServices.cs",
-              "RelativeToolTip": "Services\\WishlistServices.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAYwAYAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T07:25:03.759Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\akank\\.netService\\WishlistService\\Program.cs",
+              "DocumentMoniker": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\akank\\.netService\\WishlistService\\Program.cs",
+              "ToolTip": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACYAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T07:16:36.171Z"
+              "WhenOpened": "2026-02-02T07:16:36.171Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "WishlistDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\akank\\.netService\\WishlistService\\Data\\WishlistDbContext.cs",
+              "DocumentMoniker": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\Data\\WishlistDbContext.cs",
               "RelativeDocumentMoniker": "Data\\WishlistDbContext.cs",
-              "ToolTip": "C:\\Users\\akank\\.netService\\WishlistService\\Data\\WishlistDbContext.cs",
+              "ToolTip": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\Data\\WishlistDbContext.cs",
               "RelativeToolTip": "Data\\WishlistDbContext.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T07:15:03.176Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "WishlistItem.cs",
-              "DocumentMoniker": "C:\\Users\\akank\\.netService\\WishlistService\\Models\\WishlistItem.cs",
-              "RelativeDocumentMoniker": "Models\\WishlistItem.cs",
-              "ToolTip": "C:\\Users\\akank\\.netService\\WishlistService\\Models\\WishlistItem.cs",
-              "RelativeToolTip": "Models\\WishlistItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T07:07:50.749Z"
+              "WhenOpened": "2026-02-02T07:15:03.176Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "WishlistItem.cs",
+              "DocumentMoniker": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\Models\\WishlistItem.cs",
+              "RelativeDocumentMoniker": "Models\\WishlistItem.cs",
+              "ToolTip": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\Models\\WishlistItem.cs",
+              "RelativeToolTip": "Models\\WishlistItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T07:07:50.749Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\akank\\.netService\\WishlistService\\appsettings.json",
+              "DocumentMoniker": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\akank\\.netService\\WishlistService\\appsettings.json",
+              "ToolTip": "D:\\CDAC content\\Cdac project\\PGDAC_BlossomBeauty26\\RESTAPIs\\WishlistService\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-02T06:18:58.362Z"
+              "WhenOpened": "2026-02-02T06:18:58.362Z",
+              "EditorCaption": ""
             }
           ]
         }
