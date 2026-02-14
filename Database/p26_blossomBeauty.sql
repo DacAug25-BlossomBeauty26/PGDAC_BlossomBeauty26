@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
 --
 -- Host: localhost    Database: p26_blossombeauty
 -- ------------------------------------------------------
@@ -86,7 +86,7 @@ CREATE TABLE `cart` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `coupon_code` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`cart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +95,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (21,3,2725.00,NULL,0.00,2725.00,'2026-02-01 18:41:43','2026-02-01 18:41:43',NULL),(26,6,9000.00,NULL,0.00,9000.00,'2026-02-02 13:57:02','2026-02-02 13:57:02',NULL),(29,7,4500.00,NULL,0.00,4500.00,'2026-02-03 05:44:38','2026-02-03 05:44:38',NULL),(30,7,0.00,NULL,0.00,0.00,'2026-02-03 05:44:38','2026-02-03 05:44:38',NULL),(36,10,4500.00,NULL,0.00,4500.00,'2026-02-03 21:26:00','2026-02-03 21:26:00',NULL),(37,10,0.00,NULL,0.00,0.00,'2026-02-03 21:26:00','2026-02-03 21:26:00',NULL),(40,1,9000.00,NULL,0.00,9000.00,'2026-02-04 04:35:40','2026-02-04 04:35:40',NULL),(41,14,5300.00,NULL,0.00,5300.00,'2026-02-04 05:10:00','2026-02-04 05:10:00',NULL),(42,15,0.00,NULL,0.00,0.00,'2026-02-04 05:11:35','2026-02-04 05:11:35',NULL),(43,15,800.00,NULL,0.00,800.00,'2026-02-04 05:11:35','2026-02-04 05:11:35',NULL),(45,16,4500.00,NULL,0.00,4500.00,'2026-02-04 05:25:48','2026-02-04 05:25:48',NULL),(47,17,0.00,NULL,0.00,0.00,'2026-02-04 07:17:24','2026-02-04 07:17:24',NULL),(48,2,0.00,NULL,0.00,0.00,'2026-02-04 08:59:47','2026-02-04 08:59:47',NULL);
+INSERT INTO `cart` VALUES (21,3,2725.00,NULL,0.00,2725.00,'2026-02-01 18:41:43','2026-02-01 18:41:43',NULL),(26,6,9000.00,NULL,0.00,9000.00,'2026-02-02 13:57:02','2026-02-02 13:57:02',NULL),(29,7,4500.00,NULL,0.00,4500.00,'2026-02-03 05:44:38','2026-02-03 05:44:38',NULL),(30,7,0.00,NULL,0.00,0.00,'2026-02-03 05:44:38','2026-02-03 05:44:38',NULL),(36,10,4500.00,NULL,0.00,4500.00,'2026-02-03 21:26:00','2026-02-03 21:26:00',NULL),(37,10,0.00,NULL,0.00,0.00,'2026-02-03 21:26:00','2026-02-03 21:26:00',NULL),(41,14,5300.00,NULL,0.00,5300.00,'2026-02-04 05:10:00','2026-02-04 05:10:00',NULL),(42,15,0.00,NULL,0.00,0.00,'2026-02-04 05:11:35','2026-02-04 05:11:35',NULL),(43,15,800.00,NULL,0.00,800.00,'2026-02-04 05:11:35','2026-02-04 05:11:35',NULL),(45,16,4500.00,NULL,0.00,4500.00,'2026-02-04 05:25:48','2026-02-04 05:25:48',NULL),(47,17,0.00,NULL,0.00,0.00,'2026-02-04 07:17:24','2026-02-04 07:17:24',NULL),(49,1,0.00,NULL,0.00,0.00,'2026-02-11 07:11:22','2026-02-11 07:11:22',NULL),(50,2,4500.00,NULL,0.00,4500.00,'2026-02-11 08:15:43','2026-02-11 08:15:43',NULL),(53,19,0.00,NULL,0.00,0.00,'2026-02-11 16:38:56','2026-02-11 16:38:56',NULL);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,7 +119,7 @@ CREATE TABLE `cart_item` (
   PRIMARY KEY (`cart_item_id`),
   KEY `fk_cart` (`cart_id`),
   CONSTRAINT `fk_cart` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +128,7 @@ CREATE TABLE `cart_item` (
 
 LOCK TABLES `cart_item` WRITE;
 /*!40000 ALTER TABLE `cart_item` DISABLE KEYS */;
-INSERT INTO `cart_item` VALUES (45,21,7,'Lakme Eye Kajal',545.00,5,2725.00,'2026-02-01 18:55:33','2026-02-01 18:55:33'),(56,26,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-02 13:57:34','2026-02-02 13:57:34'),(57,26,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-02 13:57:34','2026-02-02 13:57:34'),(63,29,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-03 05:44:39','2026-02-03 05:44:39'),(69,36,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-03 21:26:01','2026-02-03 21:26:01'),(72,40,2,'Lakme Lipstick',4500.00,2,9000.00,'2026-02-04 04:36:25','2026-02-04 04:36:25'),(73,41,3,'Dove Bodywash',800.00,1,800.00,'2026-02-04 05:10:06','2026-02-04 05:10:06'),(74,43,3,'Dove Bodywash',800.00,1,800.00,'2026-02-04 05:11:35','2026-02-04 05:11:35'),(75,41,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-04 05:20:40','2026-02-04 05:20:40'),(78,45,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-04 06:20:20','2026-02-04 06:20:20');
+INSERT INTO `cart_item` VALUES (45,21,7,'Lakme Eye Kajal',545.00,5,2725.00,'2026-02-01 18:55:33','2026-02-01 18:55:33'),(56,26,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-02 13:57:34','2026-02-02 13:57:34'),(57,26,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-02 13:57:34','2026-02-02 13:57:34'),(63,29,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-03 05:44:39','2026-02-03 05:44:39'),(69,36,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-03 21:26:01','2026-02-03 21:26:01'),(73,41,3,'Dove Bodywash',800.00,1,800.00,'2026-02-04 05:10:06','2026-02-04 05:10:06'),(74,43,3,'Dove Bodywash',800.00,1,800.00,'2026-02-04 05:11:35','2026-02-04 05:11:35'),(75,41,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-04 05:20:40','2026-02-04 05:20:40'),(78,45,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-04 06:20:20','2026-02-04 06:20:20'),(89,50,2,'Lakme Lipstick',4500.00,1,4500.00,'2026-02-11 10:21:48','2026-02-11 10:21:48');
 /*!40000 ALTER TABLE `cart_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,7 +232,7 @@ CREATE TABLE `order_items` (
   KEY `fk_order_items_product` (`product_id`),
   CONSTRAINT `fk_order_items_order` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_order_items_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,7 +241,7 @@ CREATE TABLE `order_items` (
 
 LOCK TABLES `order_items` WRITE;
 /*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
-INSERT INTO `order_items` VALUES (2,25,2,'Lakme Lipstick',4500.00,1,4500.00),(3,25,4,'Pilgrim Facewash',540.00,1,540.00),(6,27,2,'Lakme Lipstick',4500.00,1,4500.00),(7,28,2,'Lakme Lipstick',4500.00,1,4500.00),(10,30,1,'TotalRepair Shampoo',500.00,1,500.00),(15,30,2,'Lakme Lipstick',4500.00,1,4500.00),(33,46,1,'TotalRepair Shampoo',500.00,3,1500.00),(34,46,2,'Lakme Lipstick',4500.00,1,4500.00),(35,47,1,'TotalRepair Shampoo',500.00,2,1000.00),(36,48,2,'Lakme Lipstick',4500.00,1,4500.00),(37,49,2,'Lakme Lipstick',4500.00,1,4500.00),(38,50,2,'Lakme Lipstick',4500.00,1,4500.00),(39,51,3,'Dove Bodywash',800.00,1,800.00),(40,51,1,'TotalRepair Shampoo',500.00,1,500.00),(41,51,4,'Pilgrim Facewash',540.00,1,540.00);
+INSERT INTO `order_items` VALUES (2,25,2,'Lakme Lipstick',4500.00,1,4500.00),(3,25,4,'Pilgrim Facewash',540.00,1,540.00),(6,27,2,'Lakme Lipstick',4500.00,1,4500.00),(7,28,2,'Lakme Lipstick',4500.00,1,4500.00),(10,30,1,'TotalRepair Shampoo',500.00,1,500.00),(15,30,2,'Lakme Lipstick',4500.00,1,4500.00),(33,46,1,'TotalRepair Shampoo',500.00,3,1500.00),(34,46,2,'Lakme Lipstick',4500.00,1,4500.00),(35,47,1,'TotalRepair Shampoo',500.00,2,1000.00),(36,48,2,'Lakme Lipstick',4500.00,1,4500.00),(37,49,2,'Lakme Lipstick',4500.00,1,4500.00),(38,50,2,'Lakme Lipstick',4500.00,1,4500.00),(39,51,3,'Dove Bodywash',800.00,1,800.00),(40,51,1,'TotalRepair Shampoo',500.00,1,500.00),(41,51,4,'Pilgrim Facewash',540.00,1,540.00),(42,52,2,'Lakme Lipstick',4500.00,1,4500.00),(43,52,3,'Dove Bodywash',800.00,1,800.00),(44,53,3,'Dove Bodywash',800.00,2,1600.00),(45,53,2,'Lakme Lipstick',4500.00,1,4500.00),(46,54,2,'Lakme Lipstick',4500.00,6,27000.00),(47,54,1,'TotalRepair Shampoo',500.00,1,500.00),(48,55,4,'Pilgrim Facewash',540.00,2,1080.00);
 /*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,7 +264,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`order_id`),
   KEY `fk_orders_user` (`user_id`),
   CONSTRAINT `fk_orders_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -273,7 +273,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (25,2,5040.00,5040.00,'DISPATCHED','2026-02-01 18:29:23','2026-02-04 05:28:57','COD'),(27,2,4500.00,4050.00,'CANCELLED','2026-02-01 18:30:54','2026-02-04 08:02:35','COD'),(28,3,4500.00,4050.00,'DELIVERED','2026-02-01 18:41:40','2026-02-02 13:47:15','COD'),(30,2,5000.00,4950.00,'CREATED','2026-02-02 11:49:58','2026-02-02 11:49:58','COD'),(46,1,6000.00,5900.00,'CREATED','2026-02-03 23:22:32','2026-02-03 23:22:32','COD'),(47,1,1000.00,900.00,'CANCELLED','2026-02-04 04:35:33','2026-02-04 04:35:58','COD'),(48,16,4500.00,4050.00,'DISPATCHED','2026-02-04 05:25:46','2026-02-04 05:29:01','COD'),(49,17,4500.00,4050.00,'CANCELLED','2026-02-04 07:17:01','2026-02-04 07:18:12','COD'),(50,17,4500.00,4050.00,'CREATED','2026-02-04 07:17:14','2026-02-04 07:17:14','COD'),(51,2,1840.00,1656.00,'CREATED','2026-02-04 08:59:04','2026-02-04 08:59:04','COD');
+INSERT INTO `orders` VALUES (25,2,5040.00,5040.00,'DISPATCHED','2026-02-01 18:29:23','2026-02-04 05:28:57','COD'),(27,2,4500.00,4050.00,'CANCELLED','2026-02-01 18:30:54','2026-02-04 08:02:35','COD'),(28,3,4500.00,4050.00,'DELIVERED','2026-02-01 18:41:40','2026-02-02 13:47:15','COD'),(30,2,5000.00,4950.00,'CREATED','2026-02-02 11:49:58','2026-02-02 11:49:58','COD'),(46,1,6000.00,5900.00,'CANCELLED','2026-02-03 23:22:32','2026-02-11 07:11:59','COD'),(47,1,1000.00,900.00,'CANCELLED','2026-02-04 04:35:33','2026-02-04 04:35:58','COD'),(48,16,4500.00,4050.00,'DISPATCHED','2026-02-04 05:25:46','2026-02-04 05:29:01','COD'),(49,17,4500.00,4050.00,'CANCELLED','2026-02-04 07:17:01','2026-02-04 07:18:12','COD'),(50,17,4500.00,4050.00,'CREATED','2026-02-04 07:17:14','2026-02-04 07:17:14','COD'),(51,2,1840.00,1656.00,'CREATED','2026-02-04 08:59:04','2026-02-04 08:59:04','COD'),(52,1,5300.00,5300.00,'CREATED','2026-02-11 07:11:19','2026-02-11 07:11:19','COD'),(53,2,6100.00,5490.00,'CANCELLED','2026-02-11 08:15:41','2026-02-11 08:15:56','COD'),(54,19,27500.00,27500.00,'CREATED','2026-02-11 14:43:30','2026-02-11 14:43:30','COD'),(55,19,1080.00,972.00,'CANCELLED','2026-02-11 16:38:42','2026-02-11 16:39:17','COD');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -390,7 +390,7 @@ CREATE TABLE `users` (
   KEY `roleFk_idx` (`role_id`),
   CONSTRAINT `areaIdFk` FOREIGN KEY (`area_id`) REFERENCES `area` (`area_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `roleFk` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -399,40 +399,33 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Akanksha','Gulekar','akanksha123','akanksha123','akanksha@gmail.com','7028180179','ACTIVE',2,1,'2026-01-30 13:16:48'),(2,'Smita','Gulekar','smita123','smita123','smita@gmail.com','9860981673','ACTIVE',2,1,'2026-01-30 13:25:56'),(3,'Aditya','Gulekar','aaditya123','Aaditya@123','aaditya@gmail.com','7481249753','ACTIVE',2,2,'2026-01-31 07:23:16'),(5,'Admin','Admin','admin123','Admin@123','admin@gmail.com','00000000000','ACTIVE',1,1,'2026-02-01 13:11:36'),(8,'Subhash','Gulekar','subhash@123','Subhash@123','subhash@123','7896541230','ACTIVE',2,2,'2026-02-03 06:22:42'),(14,'Shiva','Patil','shiva123','Shiva@123','shiva@gmail.com','7896541230','ACTIVE',2,2,'2026-02-04 05:09:03'),(16,'Sakshi','Gulekar','sakshi','Sakshi@123','sakshi@gmail.com','7896412301','ACTIVE',2,2,'2026-02-04 05:23:50'),(17,'Shana','Warsi','Shana123','Shana@123','inbox.abc@gmail.com','7896541230','ACTIVE',2,2,'2026-02-04 07:15:57'),(18,'Shivay','Patil','shiva@123','Shiva@123','shivay@gmail.com','7896541230','ACTIVE',2,2,'2026-02-04 08:57:21');
+INSERT INTO `users` VALUES (1,'Akanksha','Gulekar','akanksha123','akanksha123','akanksha@gmail.com','7028180179','ACTIVE',2,1,'2026-01-30 13:16:48'),(2,'Smita','Gulekar','smita123','smita123','smita@gmail.com','9860981673','ACTIVE',2,1,'2026-01-30 13:25:56'),(3,'Aditya','Gulekar','aaditya123','Aaditya@123','aaditya@gmail.com','7481249753','ACTIVE',2,2,'2026-01-31 07:23:16'),(5,'Admin','Admin','admin123','Admin@123','admin@gmail.com','00000000000','ACTIVE',1,1,'2026-02-01 13:11:36'),(8,'Subhash','Gulekar','subhash@123','Subhash@123','subhash@123','7896541230','ACTIVE',2,2,'2026-02-03 06:22:42'),(14,'Shiva','Patil','shiva123','Shiva@123','shiva@gmail.com','7896541230','ACTIVE',2,2,'2026-02-04 05:09:03'),(16,'Sakshi','Gulekar','sakshi','Sakshi@123','sakshi@gmail.com','7896412301','ACTIVE',2,2,'2026-02-04 05:23:50'),(17,'Shana','Warsi','Shana123','Shana@123','inbox.abc@gmail.com','7896541230','ACTIVE',2,2,'2026-02-04 07:15:57'),(18,'Shivay','Patil','shiva@123','Shiva@123','shivay@gmail.com','7896541230','ACTIVE',2,2,'2026-02-04 08:57:21'),(19,'Ganesh','Bappa','bappa123','bappa@123','bappa@gmail.com','7896541230','ACTIVE',2,2,'2026-02-11 11:58:16');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `wishlist_items`
+-- Table structure for table `wishlist`
 --
 
-DROP TABLE IF EXISTS `wishlist_items`;
+DROP TABLE IF EXISTS `wishlist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `wishlist_items` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
+CREATE TABLE `wishlist` (
+  `wishlist_id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
   `product_id` bigint NOT NULL,
-  `product_name` varchar(150) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_user_product` (`user_id`,`product_id`),
-  KEY `fk_wishlist_product` (`product_id`),
-  CONSTRAINT `fk_wishlist_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_wishlist_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`wishlist_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `wishlist_items`
+-- Dumping data for table `wishlist`
 --
 
-LOCK TABLES `wishlist_items` WRITE;
-/*!40000 ALTER TABLE `wishlist_items` DISABLE KEYS */;
-INSERT INTO `wishlist_items` VALUES (1,1,1,'TotalRepair Shampoo',500.00,'2026-02-02 08:12:53');
-/*!40000 ALTER TABLE `wishlist_items` ENABLE KEYS */;
+LOCK TABLES `wishlist` WRITE;
+/*!40000 ALTER TABLE `wishlist` DISABLE KEYS */;
+INSERT INTO `wishlist` VALUES (8,19,2),(9,19,1),(10,19,4),(12,19,8);
+/*!40000 ALTER TABLE `wishlist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -444,4 +437,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-02-04 15:18:31
+-- Dump completed on 2026-02-14 16:47:57
