@@ -14,6 +14,7 @@ import com.example.Entities.User;
 import com.example.Repository.AreaRepo;
 import com.example.Repository.RoleRepo;
 import com.example.Repository.UserRepo;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -127,5 +128,53 @@ public class UserServiceImpl implements UserService {
         return response;
     }
 
-    
+    @Override
+    public List<UserResponseDTO> getAllUsers() {
+
+        List<User> users = userRepository.findAll();
+
+        return users.stream().map(user -> {
+
+            UserResponseDTO dto = new UserResponseDTO();
+
+            dto.setId(user.getId());
+            dto.setUsername(user.getUsername());
+            dto.setFirstName(user.getFirstName());
+            dto.setLastName(user.getLastName());
+            dto.setEmail(user.getEmail());
+            dto.setContact(user.getContact());
+            dto.setRoleName(user.getRole().getRoleName());
+            dto.setAreaName(user.getArea().getAreaName());
+            dto.setStatus(user.getStatus().name());
+
+            return dto;
+
+        }).toList();
+    }
+    @Override
+    public UserResponseDTO updateUserStatus(Long userId, String status) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Convert String to Enum
+        user.setStatus(User.Status.valueOf(status.toUpperCase()));
+
+        User updatedUser = userRepository.save(user);
+
+        UserResponseDTO dto = new UserResponseDTO();
+
+        dto.setId(updatedUser.getId());
+        dto.setUsername(updatedUser.getUsername());
+        dto.setFirstName(updatedUser.getFirstName());
+        dto.setLastName(updatedUser.getLastName());
+        dto.setEmail(updatedUser.getEmail());
+        dto.setContact(updatedUser.getContact());
+        dto.setRoleName(updatedUser.getRole().getRoleName());
+        dto.setAreaName(updatedUser.getArea().getAreaName());
+        dto.setStatus(updatedUser.getStatus().name());
+
+        return dto;
+    }
+
 }
