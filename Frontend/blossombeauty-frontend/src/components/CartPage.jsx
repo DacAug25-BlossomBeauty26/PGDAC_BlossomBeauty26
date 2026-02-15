@@ -65,9 +65,7 @@ const CartPage = () => {
       .then((res) => {
         setMessage(`✅ Coupon applied! Final amount ₹${res.finalAmount}`);
       })
-      // .catch((err) => {
-      //   setMessage(err?.message || "❌ Invalid coupon");
-      // });
+      
          .catch((err) => {
         const errorMessage =
        typeof err === "string"

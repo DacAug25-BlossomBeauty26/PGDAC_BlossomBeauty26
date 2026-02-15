@@ -1,11 +1,6 @@
-
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { auth_url } from "../components/restenpoints";
-
-console.log("auth_url =", auth_url);
-
 
 /* REGISTER */
 export const registerUser = createAsyncThunk(
@@ -39,12 +34,44 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+/* FETCH ALL USERS (ADMIN) */
+export const fetchAllUsersAdmin = createAsyncThunk(
+  "user/fetchAllAdmin",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        auth_url + "/admin/getallusers"
+      );
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data || "Failed to fetch users");
+    }
+  }
+);
+
+/* UPDATE USER STATUS (BLOCK / ACTIVE) */
+export const updateUserStatusAdmin = createAsyncThunk(
+  "user/updateStatus",
+  async ({ id, status }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        auth_url + `/admin/updateuserstatus/${id}?status=${status}`
+      );
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data || "Failed to update user");
+    }
+  }
+);
+
+
 /*================= SLICE =================*/
 const userSlice = createSlice({
   name: "user",
   initialState: {
     loading: false,
     userInfo: null,
+     users: [],
     error: null,
     isAdmin: false, //  admin flag
   },
@@ -88,7 +115,34 @@ const userSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
+      
+      // FETCH ALL USERS
+.addCase(fetchAllUsersAdmin.pending, (state) => {
+  state.loading = true;
+})
+.addCase(fetchAllUsersAdmin.fulfilled, (state, action) => {
+  state.loading = false;
+  state.users = action.payload;
+})
+.addCase(fetchAllUsersAdmin.rejected, (state, action) => {
+  state.loading = false;
+  state.error = action.payload;
+})
+
+// UPDATE USER STATUS
+.addCase(updateUserStatusAdmin.fulfilled, (state, action) => {
+  const updatedUser = action.payload;
+  const index = state.users.findIndex(
+    (u) => u.id === updatedUser.id
+  );
+  if (index !== -1) {
+    state.users[index] = updatedUser;
+  }
+});
+
+
+      
   },
 });
 
